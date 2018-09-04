@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Shadowverse Search</title>
+    <base href="/">
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+
+  <body>
+
+    <header>
+      <% include ./partials/navigation %>
+      <h1>Card Search</h1>
+    </header>
+
+    <main>
+      <section class="class-buttons">
+        <ul id="crafts">
+          <li data-class="1">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000101_m.png" alt="forest"/>
+          </li>
+          <li data-class="2">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000201_m.png" alt="sword"/>
+          </li>
+          <li data-class="3">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000301_m.png" alt="rune"/>
+          </li>
+          <li data-class="4">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000401_m.png" alt="dragon"/>
+          </li>
+          <li data-class="5">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000501_m.png" alt="shadow"/>
+          </li>
+          <li data-class="6">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000601_m.png" alt="blood"/>
+          </li>
+          <li data-class="7">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000701_m.png" alt="haven"/>
+          </li>
+          <li data-class="8">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_100000801_m.png" alt="portal"/>
+          </li>
+          <li data-class="0">
+            <img class="class-image" src="https://sv.bagoum.com/emblem/em_101021010_m.png" alt="neutral"/>
+          </li>
+        </ul>
+      </section>
+      <section class="js-search-bar card-search">
+        <form class="js-search-form card-form">
+          <label for="js-card-search">Search</label>
+          <input type="text" for="js-card-search" value="">
+        </form>
+      </section>
+      <section id="card-holder"></section>
+    </main>
+    
+    <script type="text/javascript" src="/scripts/cards.js"></script>
+
+  </body>
+
+</html>

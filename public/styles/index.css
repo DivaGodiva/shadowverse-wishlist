@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Raleway;
+}
+
+main, h1 {
+  text-align: center;
+}
+
+.class-image {
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.card-search {
+  padding: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.navbar {
+  background-color: whitesmoke;
+}
+
+.logout, .search-link, .list-link {
+  float: right;
+}
+
+li a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.card-display {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.logout {
+  float: left;
+  background-color: lightgrey
+}
+
+.js-class-button {
+  cursor: pointer;
+}
+
+#crafts {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+#crafts li {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.card-picture {
+  height: 250px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: relative;
+  display: block;
+  position: absolute;
+  background-color: black;
+  color: white;
+  border-radius: 6px; 
+  width: 200px;
+}
+
+.card-display:hover .tooltip {
+  visibility: visible;
+}
+

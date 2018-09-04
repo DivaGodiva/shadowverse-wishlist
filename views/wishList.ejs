@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+      <title>Node Authentication</title>
+      <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+
+  <body>
+
+    <header>
+        <% include ./partials/navigation %>
+        <h1>Card List</h1>
+    </header>
+    
+    <main>
+
+      <section class="js-search-bar list-search">
+        <div class="js-filter">
+          <form class="js-search-form list-form">
+            <label for="js-list-search">Search</label>
+            <input type="text" for="js-list-search" value="">
+          </form>
+        </div>
+        <div="js-filter">
+          <select>
+            <option selected disabled>Filter</option>
+            <option value="high">High</option>
+            <option value="mid">Mid</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+      </section>
+
+      <section>
+        <h2>Local</h2>
+        <ul>
+          <li>id:  <%= user._id %></li>
+          <li>email:  <%= user.local.username %></li>
+          <li>password:  <%= user.local.password %></li>
+        </ul>
+      </section>
+
+    </main>
+
+  </body>
+
+</html>
