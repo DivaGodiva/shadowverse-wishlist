@@ -15,7 +15,7 @@ module.exports = function(passport) {
     });
   });
 
-  //sign-up
+  //signup
 
   passport.use('local-signup', new LocalStrategy({
     usernameField : 'username',
