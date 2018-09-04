@@ -16,21 +16,21 @@ var configDB = require('./config/database.js');
 
 mongoose.connect(configDB.url); 
 
-require('./config/passport')(passport); // pass passport for configuration
-
-app.use(express.static('public'));
-app.use(morgan('dev'));
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+require('./config/passport')(passport); 
 
 app.set('view engine', 'ejs'); 
 
-app.use(session({ secret: 'ilikethething' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(express.static('public'));
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser()); 
 
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+app.use(session({ secret: 'ilikethething' })); 
+app.use(passport.initialize());
+app.use(passport.session()); 
+app.use(flash()); 
+
+require('./app/routes.js')(app, passport); 
 
 app.listen(port);
 console.log('STARTINNGGGGGG ' + port);

@@ -81,7 +81,6 @@ list.addEventListener('click', function(e) {
   }
 });
 
-
 document.querySelector('.card-form').addEventListener('keyup', function(e) {
   e.preventDefault();
   cardDeletor();
