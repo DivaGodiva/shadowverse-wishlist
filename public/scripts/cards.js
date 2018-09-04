@@ -25,28 +25,55 @@ const cardDeletor = function() {
   }
 };
 
+const renderList = function(vari, list) {
+  const jsonObj = vari.data.cards;
+  jsonObj.forEach(el => {
+    list.push(el);
+  });
+};
+
+const renderListItemClick = function(vari, list) {
+  renderList(vari, list);
+  list.forEach(el => {
+    let stats;
+    cardCreator(el.card_id, el.card_name);
+    if (el.evo_atk > 0 || el.evo_life > 0) {
+      stats = `${el.evo_atk} / ${el.evo_life}`;
+    } else {
+      stats = '';
+    }
+    document.getElementById(el.card_id).innerHTML = 
+      `${el.skill_disc}<br>${stats}<br>${el.evo_skill_disc}`;
+  });
+};
+
+const renderListItemKey = function(list) {
+  list.forEach(el => {
+    let stats;
+    cardCreator(el.card_id, el.card_name);
+    if (el.evo_atk > 0 || el.evo_life > 0) {
+      stats = `${el.evo_atk} / ${el.evo_life}`;
+    } else {
+      stats = '';
+    }
+    document.getElementById(el.card_id).innerHTML = 
+      `${el.skill_disc}<br>${stats}<br>${el.evo_skill_disc}`;
+  });
+};
+
+let cardArray = [];
+
 list.addEventListener('click', function(e) {
   e.preventDefault();
   cardDeletor();
+  cardArray = [];
   if (e.target.tagName.toLowerCase() === 'img') { 
     const cardClass = e.target.parentNode.getAttribute('data-class');
     const URL = `https://shadowverse-portal.com/api/v1/cards?format=json&clan=${cardClass}`;
-    fetch(URL)
-    // , {mode: 'no-cors'}
+    fetch(URL) // , {mode: 'no-cors'}
       .then((resp) => resp.json())
       .then(function(myJson) {
-        const jsonObj = myJson.data.cards;
-        jsonObj.forEach(el => {
-          let stats;
-          cardCreator(el.card_id, el.card_name);
-          if (el.evo_atk > 0 || el.evo_life > 0) {
-            stats = `${el.evo_atk} / ${el.evo_life}`;
-          } else {
-            stats = '';
-          }
-          document.getElementById(el.card_id).innerHTML = 
-            `${el.skill_disc}<br>${stats}<br>${el.evo_skill_disc}`;
-        });
+        renderListItemClick(myJson, cardArray);
       })
       .catch(function(error) {
         console.log(error);
@@ -54,15 +81,14 @@ list.addEventListener('click', function(e) {
   }
 });
 
+
 document.querySelector('.card-form').addEventListener('keyup', function(e) {
   e.preventDefault();
-  const inputVal = e.target.value.toLowerCase();
-  let test = document.querySelectorAll('.card-display');
-  test.forEach(el => {
-    if (!el.id.toLowerCase().includes(`${inputVal}`)) {
-      document.getElementById('card-holder').removeChild(document.getElementById(`${el.id}`));
-    }
-  });
+  cardDeletor();
+  const inputVal = e.target.value.toLowerCase().trim();
+  const regexp = new RegExp(inputVal, 'i');
+  let array = cardArray.filter(item => regexp.test(item.card_name));
+  renderListItemKey(array);
 });
 
 document.querySelector('.card-form').addEventListener('submit', function(e) {
