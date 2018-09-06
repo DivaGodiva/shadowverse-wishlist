@@ -31,7 +31,7 @@ h1 {
   padding: 20px;
 }
 
-ul {
+ul.navbar {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -100,10 +100,12 @@ li a {
   border-radius: 6px; 
   width: 200px;
   padding: 5px;
+  font-weight: bold;
+  z-index: 1;
 }
 
-.card-display:hover .tooltip {
-  opacity: .75;
+li.card-display:hover .tooltip {
+  opacity: .9;
 }
 
 .actions {
@@ -117,6 +119,13 @@ li a {
 
 li.card-display:hover .actions {
   opacity: 1;
+}
+
+button {
+  opacity: .8;
+} 
+
+#card-holder {
 }
 
 
