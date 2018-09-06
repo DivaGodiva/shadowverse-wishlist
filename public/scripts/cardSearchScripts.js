@@ -16,7 +16,7 @@ const cardCreator = function(imgUrl, nameUrl) {
   listEl.setAttribute('class', 'card-display');
   toolTip.setAttribute('id', `${imgUrl}`);
   toolTip.setAttribute('class', 'tooltip');
-  addDiv.setAttribute('class', 'action');
+  addDiv.setAttribute('class', 'actions');
   addButton.innerHTML = 'Add';
   addDiv.appendChild(addButton);
   cards.appendChild(listEl);
@@ -38,9 +38,25 @@ const renderList = function(vari, list) {
   });
 };
 
-const renderListItemClick = function(vari, list) {
-  renderList(vari, list);
-  list.forEach(el => {
+// const booleanTest = function(test) {
+//   if (test) {
+//     return test;
+//   }
+// };
+
+// const toolTipCreator = function(json) {
+//   let stats;
+//   if (json.evo_atk > 0 || json.evo_life > 0) {
+//     stats = `${json.evo_atk} / ${json.evo_life}`;
+//   } else {
+//     stats = '';
+//   }
+//   let array = [json.skill_desc, stats, json.evo_skill_disc];
+
+// };
+
+const useCardCreator = function(vari) {
+  vari.forEach(el => {
     let stats;
     cardCreator(el.card_id, el.card_name);
     if (el.evo_atk > 0 || el.evo_life > 0) {
@@ -53,18 +69,13 @@ const renderListItemClick = function(vari, list) {
   });
 };
 
+const renderListItemClick = function(vari, list) {
+  renderList(vari, list);
+  useCardCreator(list);
+};
+
 const renderListItemKey = function(list) {
-  list.forEach(el => {
-    let stats;
-    cardCreator(el.card_id, el.card_name);
-    if (el.evo_atk > 0 || el.evo_life > 0) {
-      stats = `${el.evo_atk} / ${el.evo_life}`;
-    } else {
-      stats = '';
-    }
-    document.getElementById(el.card_id).innerHTML = 
-      `${el.skill_disc}<br>${stats}<br>${el.evo_skill_disc}`;
-  });
+  useCardCreator(list);
 };
 
 let cardArray = [];

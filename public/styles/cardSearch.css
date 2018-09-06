@@ -13,6 +13,9 @@ body {
 
 main, h1 {
   text-align: center;
+}
+
+h1 {
   text-shadow: 3px 3px black;
 }
 
@@ -57,17 +60,6 @@ li a {
   position: relative;
 }
 
-.centered {
-  visibility: hidden;
-  height: 20px;
-  width: 50px;
-  background-color: white;
-  position: absolute;
-  top: 75%;
-  left: 50%; 
-  transform: translate(-50%, -50%);
-}
-
 .logout {
   float: left;
   background-color: lightgrey
@@ -99,18 +91,32 @@ li a {
 }
 
 .tooltip {
-  visibility: hidden;
+  transition: opacity 0.1s ease-in-out;
+  opacity: 0;
   display: block;
   position: absolute;
-  background-color: black;
+  background-color: darkgrey;
   color: white;
   border-radius: 6px; 
   width: 200px;
+  padding: 5px;
 }
 
 .card-display:hover .tooltip {
-  visibility: visible;
+  opacity: .75;
 }
 
+.actions {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  display: block;
+  position: absolute;
+  bottom: 50px;
+  width: 200px;
+}
+
+li.card-display:hover .actions {
+  opacity: 1;
+}
 
 
