@@ -38,34 +38,29 @@ const renderList = function(vari, list) {
   });
 };
 
-// const booleanTest = function(test) {
-//   if (test) {
-//     return test;
-//   }
-// };
-
-// const toolTipCreator = function(json) {
-//   let stats;
-//   if (json.evo_atk > 0 || json.evo_life > 0) {
-//     stats = `${json.evo_atk} / ${json.evo_life}`;
-//   } else {
-//     stats = '';
-//   }
-//   let array = [json.skill_desc, stats, json.evo_skill_disc];
-
-// };
+const toolTipCreator = function(json) {
+  let stats;
+  if (json.evo_atk > 0 || json.evo_life > 0) {
+    stats = `${json.evo_atk} / ${json.evo_life}`;
+  } else {
+    stats = '';
+  }
+  let array = [json.skill_disc, stats, json.evo_skill_disc];
+  let array2 = [];
+  array.forEach(el => {
+    if (el) {
+      array2.push(el);
+    } 
+  });
+  return array2;
+};
 
 const useCardCreator = function(vari) {
   vari.forEach(el => {
-    let stats;
     cardCreator(el.card_id, el.card_name);
-    if (el.evo_atk > 0 || el.evo_life > 0) {
-      stats = `${el.evo_atk} / ${el.evo_life}`;
-    } else {
-      stats = '';
-    }
-    document.getElementById(el.card_id).innerHTML = 
-      `${el.skill_disc}<br>${stats}<br>${el.evo_skill_disc}`;
+    let descArray = toolTipCreator(el);
+    let desc = descArray.join('<br>');
+    document.getElementById(el.card_id).innerHTML = `${desc}`;
   });
 };
 
