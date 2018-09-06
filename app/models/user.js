@@ -7,7 +7,8 @@ var userSchema = mongoose.Schema({
   local: {
     username: String,
     password: String,
-  }
+  },
+  cards: [{type: String}]
 });
 
 userSchema.methods.generateHash = function(password) {

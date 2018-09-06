@@ -54,6 +54,18 @@ li a {
   display: inline-block;
   text-align: center;
   text-decoration: none;
+  position: relative;
+}
+
+.centered {
+  visibility: hidden;
+  height: 20px;
+  width: 50px;
+  background-color: white;
+  position: absolute;
+  top: 75%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
 }
 
 .logout {
@@ -82,11 +94,12 @@ li a {
   height: 250px;
   width: 200px;
   cursor: pointer;
+  z-index: -1;
+  position: relative;
 }
 
 .tooltip {
   visibility: hidden;
-  position: relative;
   display: block;
   position: absolute;
   background-color: black;
@@ -98,4 +111,6 @@ li a {
 .card-display:hover .tooltip {
   visibility: visible;
 }
+
+
 

@@ -8,15 +8,21 @@ const cardCreator = function(imgUrl, nameUrl) {
   let img = document.createElement('IMG');
   let listEl = document.createElement('LI');
   let toolTip = document.createElement('SPAN');
+  let addDiv = document.createElement('DIV');
+  let addButton = document.createElement('BUTTON');
   img.setAttribute('src', `https://shadowverse-portal.com/image/card/en/C_${imgUrl}.png`);
   img.setAttribute('class', 'card-picture');
   listEl.setAttribute('id', `${nameUrl}`);
   listEl.setAttribute('class', 'card-display');
   toolTip.setAttribute('id', `${imgUrl}`);
   toolTip.setAttribute('class', 'tooltip');
+  addDiv.setAttribute('class', 'action');
+  addButton.innerHTML = 'Add';
+  addDiv.appendChild(addButton);
   cards.appendChild(listEl);
   listEl.appendChild(img);
   listEl.appendChild(toolTip);
+  listEl.appendChild(addDiv);
 };
 
 const cardDeletor = function() {
@@ -79,6 +85,11 @@ list.addEventListener('click', function(e) {
         console.log(error);
       });
   }
+});
+
+cards.addEventListener('click', function(e) {
+  e.preventDefault();
+
 });
 
 document.querySelector('.card-form').addEventListener('keyup', function(e) {
