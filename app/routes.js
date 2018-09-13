@@ -2,6 +2,8 @@
 
 module.exports = function(app, passport) {
 
+  const Card = require('./models/cards');
+
   //home
   app.get('/', function(req, res) {
     res.render('index'); 
@@ -34,6 +36,19 @@ module.exports = function(app, passport) {
     res.render('cardSearch', {
       user : req.user 
     });
+  });
+
+  app.post('/cardSearch', function(req, res) {
+    const {cardId} = req.body;
+    const userId = req.user.id;
+    const newCard = {userId, cardId};
+    Card.create(newCard)
+      .then(result => {
+        res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   });
 
   //wishlist

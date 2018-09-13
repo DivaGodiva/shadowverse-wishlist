@@ -16,7 +16,7 @@ main, h1 {
 }
 
 h1 {
-  text-shadow: 3px 3px black;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
 .class-image {
@@ -95,13 +95,19 @@ li a {
   opacity: 0;
   display: block;
   position: absolute;
-  background-color: darkgrey;
   color: white;
   border-radius: 6px; 
-  width: 200px;
-  padding: 5px;
+  width: 140px;
+  left: 30px;
+  top: 65px;
+  height: 115px;
+  overflow-y: auto;
   font-weight: bold;
   z-index: 1;
+}
+
+.card-display:hover img {
+  filter: brightness(30%);
 }
 
 li.card-display:hover .tooltip {
@@ -125,7 +131,8 @@ button {
   opacity: .8;
 } 
 
-#card-holder {
+.hidden-search {
+  display: none;
 }
 
 

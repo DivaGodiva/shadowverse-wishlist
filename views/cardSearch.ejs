@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="utf-8" />
     <title>Shadowverse Search</title>
     <base href="/">
     <link rel="stylesheet" href="/styles/cardSearch.css" />
   </head>
-
   <body>
-
     <header>
       <% include ./partials/navigation %>
       <h1>Card Search</h1>
     </header>
-
     <main>
       <section class="class-buttons">
         <ul id="crafts">
@@ -48,7 +44,7 @@
         </ul>
       </section>
       <section class="js-search-bar card-search">
-        <form class="js-search-form card-form">
+        <form class="js-search-form card-form hidden-search">
           <label for="js-card-search">Search</label>
           <input type="text" for="js-card-search" value="">
         </form>
@@ -57,9 +53,10 @@
         <ul id="card-holder"></ul>
       </section>
     </main>
-    
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/scripts/api.js"></script>
     <script type="text/javascript" src="/scripts/cardSearchScripts.js"></script>
-
   </body>
-
 </html>

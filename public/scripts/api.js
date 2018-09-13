@@ -1,8 +1,9 @@
-/* global $ store */
+/* global $*/
 'use strict';
 
 const api = (function () {
   const search = function (path, query) {
+    console.log(query);
     return $.ajax({
       type: 'GET',
       url: path,
@@ -27,13 +28,10 @@ const api = (function () {
     });
   };
   const create = function (path, obj) {
-    return $.ajax({
-      type: 'POST',
-      url: path,
-      contentType: 'application/json',
-      dataType: 'json',
-      processData: false,
-      data: JSON.stringify(obj),
+    return fetch(path, { 
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8'},
+      body: JSON.stringify(obj),
     });
   };
   const remove = function (path) {

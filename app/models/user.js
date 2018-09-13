@@ -7,9 +7,10 @@ var userSchema = mongoose.Schema({
   local: {
     username: String,
     password: String,
-  },
-  cards: [{type: String}]
+  }
 });
+
+userSchema.set('timestamps', true);
 
 userSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

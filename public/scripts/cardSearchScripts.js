@@ -1,3 +1,4 @@
+/* global api */
 'use strict';
 
 const cards = document.getElementById('card-holder');
@@ -77,6 +78,7 @@ let cardArray = [];
 
 list.addEventListener('click', function(e) {
   e.preventDefault();
+  document.querySelector('.js-search-form').classList.add('hidden-search');
   cardDeletor();
   cardArray = [];
   if (e.target.tagName.toLowerCase() === 'img') { 
@@ -86,6 +88,7 @@ list.addEventListener('click', function(e) {
       .then((resp) => resp.json())
       .then(function(myJson) {
         renderListItemClick(myJson, cardArray);
+        document.querySelector('.js-search-form').classList.remove('hidden-search');
       })
       .catch(function(error) {
         console.log(error);
@@ -95,7 +98,6 @@ list.addEventListener('click', function(e) {
 
 cards.addEventListener('click', function(e) {
   e.preventDefault();
-
 });
 
 document.querySelector('.card-form').addEventListener('keyup', function(e) {
@@ -109,4 +111,18 @@ document.querySelector('.card-form').addEventListener('keyup', function(e) {
 
 document.querySelector('.card-form').addEventListener('submit', function(e) {
   e.preventDefault();
+});
+
+cards.addEventListener('click', function(e) {
+  e.preventDefault();
+  const cardObj = {
+    cardId: e.target.parentNode.parentNode.childNodes[1].id
+  };
+  if (e.target.tagName === 'BUTTON') {
+    api.create('/cardSearch', cardObj)
+      .catch(function(error) {
+        console.log(error);
+      });
+    console.log('added');
+  }
 });
