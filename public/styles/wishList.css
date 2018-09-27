@@ -100,3 +100,7 @@ li a {
 .card-display:hover .tooltip {
   visibility: visible;
 }
+
+.hidden-search {
+  display: none;
+}

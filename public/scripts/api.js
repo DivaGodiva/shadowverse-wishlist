@@ -2,21 +2,27 @@
 'use strict';
 
 const api = (function () {
-  const search = function (path, query) {
-    console.log(query);
-    return $.ajax({
-      type: 'GET',
-      url: path,
-      dataType: 'json',
-      data: query,
-    });
-  };
+  // const search = function (path, query) {
+  //   console.log(query);
+  //   return $.ajax({
+  //     type: 'GET',
+  //     url: path,
+  //     dataType: 'json',
+  //     data: query,
+  //   });
+  // };
   const details = function (path) {
-    return $.ajax({
-      type: 'GET',
-      dataType: 'json',
-      url: path,
+    return fetch(path, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json; charset=utf-8'},
+      body: null, 
+      redirect: 'follow'
     });
+    // return $.ajax({
+    //   type: 'GET',
+    //   dataType: 'json',
+    //   url: path,
+    // });
   };
   const update = function (path, obj) {
     return $.ajax({
@@ -30,7 +36,7 @@ const api = (function () {
   const create = function (path, obj) {
     return fetch(path, { 
       method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8'},
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify(obj),
     });
   };
@@ -43,7 +49,7 @@ const api = (function () {
   };
   return {
     create,
-    search,
+    // search,
     details,
     update,
     remove
