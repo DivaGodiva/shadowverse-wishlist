@@ -10,8 +10,6 @@ var userSchema = mongoose.Schema({
   }
 });
 
-userSchema.set('timestamps', true);
-
 userSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

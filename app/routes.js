@@ -3,8 +3,8 @@
 module.exports = function(app, passport) {
 
   const Card = require('./models/cards');
-  const mongo = require('mongodb');
-  var url = require('../config/database.js');
+  // const mongo = require('mongodb');
+  // var url = require('../config/database.js');
 
   //home
   app.get('/', function(req, res) {
@@ -58,6 +58,7 @@ module.exports = function(app, passport) {
     const userId = req.user.id;
     Card.find({userId})
       .then(result => {
+        result = result.map(item => item.serialize());
         let datap = JSON.stringify(result);
         res.render('wishList', {user:req.user, data: datap});
         // res.json(result);

@@ -23,13 +23,15 @@ h1 {
   height: 100px;
   width: 100px;
   cursor: pointer;
+  box-shadow: 2px 2px 5px 0px black;
+  border-radius: 50%;
 }
 
 .card-search {
   padding: 20px;
 }
 
-ul {
+ul.navbar {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -55,6 +57,7 @@ li a {
   display: inline-block;
   text-align: center;
   text-decoration: none;
+  position: relative;
 }
 
 .logout {
@@ -75,7 +78,6 @@ li a {
 
 #crafts li {
   display: inline-block;
-  margin: 0 10px 10px 0;
   border-radius: 50%;
   text-align: center;
 }
@@ -84,23 +86,51 @@ li a {
   height: 250px;
   width: 200px;
   cursor: pointer;
+  z-index: -1;
+  position: relative;
 }
 
 .tooltip {
-  visibility: hidden;
-  position: relative;
+  transition: opacity 0.1s ease-in-out;
+  opacity: 0;
   display: block;
   position: absolute;
-  background-color: black;
   color: white;
   border-radius: 6px; 
+  width: 140px;
+  left: 30px;
+  top: 65px;
+  height: 115px;
+  overflow-y: auto;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.card-display:hover img {
+  filter: brightness(30%);
+}
+
+li.card-display:hover .tooltip {
+  opacity: .9;
+}
+
+.actions {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  display: block;
+  position: absolute;
+  bottom: 50px;
   width: 200px;
 }
 
-.card-display:hover .tooltip {
-  visibility: visible;
+li.card-display:hover .actions {
+  opacity: 1;
 }
 
-.hidden-search {
-  display: none;
+button {
+  opacity: .8;
+} 
+
+#db-info {
+  display: none
 }
