@@ -3,7 +3,7 @@
 
 const cards = document.getElementById('card-holder');
 
-const cardCreator = function(imgUrl, nameUrl, imgId) {
+const cardCreator = function(imgUrl, nameUrl, imgId, dbId) {
   let img = document.createElement('IMG');
   let listEl = document.createElement('LI');
   let toolTip = document.createElement('SPAN');
@@ -13,7 +13,10 @@ const cardCreator = function(imgUrl, nameUrl, imgId) {
   img.setAttribute('src', `${imgUrl}`);
   img.setAttribute('class', 'card-picture');
   listEl.setAttribute('id', `${nameUrl}`);
-  listEl.setAttribute('class', 'card-display');
+
+  console.log(dbId);
+
+  listEl.setAttribute('class', `card-display ${dbId}`);
   toolTip.setAttribute('id', `${imgId}`);
   toolTip.setAttribute('class', 'tooltip');
   addDiv.setAttribute('class', 'actions');
@@ -44,15 +47,15 @@ const toolTipCreator = function(json) {
   return array2;
 };
 
-const useCardCreator = function(vari) {
-  cardCreator(vari.image, vari.name, vari.id);
+const useCardCreator = function(vari, dbId) {
+  cardCreator(vari.image, vari.name, vari.id, dbId);
   let descArray = toolTipCreator(vari);
   let desc = descArray.join('<br>');
   document.getElementById(vari.id).innerHTML = `${desc}`;
 };
 
-const renderListItemKey = function(vari) {
-  useCardCreator(vari.data.card);
+const renderListItemKey = function(vari, dbId) {
+  useCardCreator(vari.data.card, dbId);
 };
 
 let dbCards = document.getElementById('db-info').innerHTML;
@@ -70,21 +73,38 @@ window.onload = function() {
 
 window.onload = function() {
   let jsonArr = JSON.parse(dbCards);
-  let arr = [];
-  jsonArr.forEach(item => arr.push(item.cardId));
-  arr.forEach(num => {
-    let url = `https://shadowverse-portal.com/api/v1/card?format=json&card_id=${num}`;
+  let dbIdObj = {};
+  jsonArr.forEach(item => {
+    dbIdObj[item.id] = item.cardId;
+  });
+  let objKeyList = Object.keys(dbIdObj);
+  Promise.all(objKeyList.map(item => {
+    let url = `https://shadowverse-portal.com/api/v1/card?format=json&card_id=${dbIdObj[item]}`;
     fetch(url)
       .then((resp) => resp.json())
       .then(function(myJson) {
-        renderListItemKey(myJson);
+        renderListItemKey(myJson, item);
       })
       .catch(function(error) {
         console.log(error);
       });
-  });
-  console.log(arr);
+  }));
+  console.log(dbIdObj);
 };
+
+cards.addEventListener('click', function(e) {
+  e.preventDefault();
+  const cardObj = {
+    cardId: e.target.parentNode.parentNode.childNodes[1].id
+  };
+  if (e.target.tagName === 'BUTTON') {
+    api.create('/cardSearch', cardObj)
+      .catch(function(error) {
+        console.log(error);
+      });
+    console.log('added');
+  }
+});
 
 cards.addEventListener('click', function(e) {
   e.preventDefault();
