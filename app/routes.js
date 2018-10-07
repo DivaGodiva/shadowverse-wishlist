@@ -68,6 +68,20 @@ module.exports = function(app, passport) {
       });
   });
 
+  app.delete('/wishList', isLoggedIn, function(req, res) {
+    const {dbId} = req.body;
+    const userId = req.user.id;
+    console.log(dbId);
+    console.log(userId);
+    Card.findOneAndDelete({ _id: dbId, userId })
+      .then(() => {
+        res.sendStatus(204);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  });
+
   //logout
   app.get('/logout', function(req, res) {
     req.logout();

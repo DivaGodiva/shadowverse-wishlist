@@ -2,6 +2,7 @@
 'use strict';
 
 const cards = document.getElementById('card-holder');
+let dbCards = document.getElementById('db-info').innerHTML;
 
 const cardCreator = function(imgUrl, nameUrl, imgId, dbId) {
   let img = document.createElement('IMG');
@@ -12,11 +13,8 @@ const cardCreator = function(imgUrl, nameUrl, imgId, dbId) {
   let removeButton = document.createElement('BUTTON');
   img.setAttribute('src', `${imgUrl}`);
   img.setAttribute('class', 'card-picture');
-  listEl.setAttribute('id', `${nameUrl}`);
-
-  console.log(dbId);
-
-  listEl.setAttribute('class', `card-display ${dbId}`);
+  listEl.setAttribute('id', `${dbId}`);
+  listEl.setAttribute('class', `card-display ${nameUrl}`);
   toolTip.setAttribute('id', `${imgId}`);
   toolTip.setAttribute('class', 'tooltip');
   addDiv.setAttribute('class', 'actions');
@@ -58,9 +56,7 @@ const renderListItemKey = function(vari, dbId) {
   useCardCreator(vari.data.card, dbId);
 };
 
-let dbCards = document.getElementById('db-info').innerHTML;
-
-window.onload = function() {
+const getSequence = function() {
   let data = ('<%= data %>');
   api.details('/wishList')
     .then((response) => {
@@ -71,7 +67,7 @@ window.onload = function() {
     });
 };
 
-window.onload = function() {
+const loadingSequence = function() {
   let jsonArr = JSON.parse(dbCards);
   let dbIdObj = {};
   jsonArr.forEach(item => {
@@ -89,20 +85,25 @@ window.onload = function() {
         console.log(error);
       });
   }));
-  console.log(dbIdObj);
+};
+
+window.onload = function() {
+  getSequence();
+  loadingSequence();
 };
 
 cards.addEventListener('click', function(e) {
   e.preventDefault();
-  const cardObj = {
-    cardId: e.target.parentNode.parentNode.childNodes[1].id
+  let removeObj = {
+    dbId: e.target.parentNode.parentNode.id
   };
-  if (e.target.tagName === 'BUTTON') {
-    api.create('/cardSearch', cardObj)
+  if (e.target.innerHTML === 'Del') {
+    e.target.parentNode.parentNode.remove();
+    api.remove('/wishList', removeObj)
       .catch(function(error) {
         console.log(error);
       });
-    console.log('added');
+    console.log('removed');
   }
 });
 

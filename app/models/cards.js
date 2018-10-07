@@ -8,6 +8,8 @@ var cardSchema = mongoose.Schema({
   createdAt: { type: Number, default: Date.now } 
 });
 
+cardSchema.index({ cardId: 1, userId: 1 }, { unique: true });
+
 cardSchema.methods.serialize = function() {
   return {
     cardId: this.cardId,
