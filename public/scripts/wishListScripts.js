@@ -30,8 +30,8 @@ const cardCreator = function(imgUrl, nameUrl, imgId, dbId, pri) {
   toolTip.setAttribute('id', `${imgId}`);
   toolTip.setAttribute('class', 'tooltip');
   addDiv.setAttribute('class', 'actions');
-  editButton.innerHTML = 'Edit';
-  removeButton.innerHTML = 'Del';
+  editButton.innerHTML = 'Switch';
+  removeButton.innerHTML = 'Delete';
   addDiv.appendChild(editButton);
   addDiv.appendChild(removeButton);
   if (priority === 'high') {
@@ -115,7 +115,7 @@ cards.addEventListener('click', function(e) {
   let removeObj = {
     dbId: e.target.parentNode.parentNode.id
   };
-  if (e.target.innerHTML === 'Del') {
+  if (e.target.innerHTML === 'Delete') {
     e.target.parentNode.parentNode.remove();
     api.remove('/wishList', removeObj)
       .catch(function(error) {
@@ -126,9 +126,39 @@ cards.addEventListener('click', function(e) {
 });
 
 
-// cards.addEventListener('click', function(e) {
-//   e.preventDefault();
+cards.addEventListener('click', function(e) {
+  let editObj = {
+    dbId: e.target.parentNode.parentNode.id,
+    pri: '',
+  };
+  if (e.target.innerHTML === 'Switch' && e.target.parentNode.parentNode.parentNode.id === 'high') {
+    editObj.pri = 'low';
+  }
+  if (e.target.innerHTML === 'Switch' && e.target.parentNode.parentNode.parentNode.id === 'low') {
+    editObj.pri = 'high';
+  }
+  console.log(editObj);
+  if (e.target.innerHTML === 'Switch') {
+    api.update('/wishList', editObj)
+      .catch(function(error) {
+        console.log(error);
+      });
+    console.log('switched');
+  }
+});
 
+// cards.addEventListener('change', function(e) {
+//   const cardObj = {
+//     cardId: e.target.parentNode.parentNode.childNodes[1].id,
+//     priority: e.target.value
+//   };
+//   if (e.target.tagName === 'SELECT') {
+//     api.create('/cardSearch', cardObj)
+//       .catch(function(error) {
+//         console.log(error);
+//       });
+//     console.log('added');
+//   }
 // });
 
 

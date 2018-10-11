@@ -136,3 +136,7 @@ button {
 #db-info {
   display: none
 }
+
+hr {
+  width: 90%
+}

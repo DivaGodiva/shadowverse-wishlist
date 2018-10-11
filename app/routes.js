@@ -3,8 +3,6 @@
 module.exports = function(app, passport) {
 
   const Card = require('./models/cards');
-  // const mongo = require('mongodb');
-  // var url = require('../config/database.js');
 
   //home
   app.get('/', function(req, res) {
@@ -44,7 +42,6 @@ module.exports = function(app, passport) {
     const {cardId, priority} = req.body;
     const userId = req.user.id;
     const newCard = {userId, cardId, priority};
-
     Card.create(newCard)
       .then(result => {
         res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
@@ -71,12 +68,21 @@ module.exports = function(app, passport) {
 
   app.delete('/wishList', isLoggedIn, function(req, res) {
     const {dbId} = req.body;
-    const userId = req.user.id;
-    console.log(dbId);
-    console.log(userId);
-    Card.findOneAndDelete({ _id: dbId, userId })
+    Card.findOneAndDelete({ _id: dbId})
       .then(() => {
+        console.log(dbId);
         res.sendStatus(204);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  });
+
+  app.put('/wishList', isLoggedIn, function(req, res) {
+    const {dbId, pri} = req.body;
+    Card.findOneAndUpdate({_id: dbId}, {priority: pri}, {new: true})
+      .then(result => {
+        res.json(result);
       })
       .catch(function(error) {
         console.log(error);

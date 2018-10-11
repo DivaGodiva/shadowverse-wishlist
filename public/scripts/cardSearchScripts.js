@@ -134,14 +134,11 @@ cards.addEventListener('change', function(e) {
     cardId: e.target.parentNode.parentNode.childNodes[1].id,
     priority: e.target.value
   };
-
   if (e.target.tagName === 'SELECT') {
-    console.log('change');
     api.create('/cardSearch', cardObj)
       .catch(function(error) {
         console.log(error);
       });
-    console.log(e.target);
     console.log('added');
   }
 });

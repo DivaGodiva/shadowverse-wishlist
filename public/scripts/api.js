@@ -11,12 +11,10 @@ const api = (function () {
     });
   };
   const update = function (path, obj) {
-    return $.ajax({
-      type: 'PUT',
-      url: path,
-      contentType: 'application/json',
-      dataType: 'json',
-      data: JSON.stringify(obj),
+    return fetch(path, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: JSON.stringify(obj),
     });
   };
   const create = function (path, obj) {
