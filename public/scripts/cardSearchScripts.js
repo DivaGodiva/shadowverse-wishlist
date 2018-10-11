@@ -93,14 +93,13 @@ let cardArray = [];
 
 list.addEventListener('click', function(e) {
   e.preventDefault();
-  console.log(selector);
   document.querySelector('.js-search-form').classList.add('hidden-search');
   cardDeletor();
   cardArray = [];
   if (e.target.tagName.toLowerCase() === 'img') { 
     const cardClass = e.target.parentNode.getAttribute('data-class');
     const URL = `https://shadowverse-portal.com/api/v1/cards?format=json&clan=${cardClass}`;
-    fetch(URL) // , {mode: 'no-cors'}
+    fetch(URL, {mode: 'cors'})
       .then((resp) => resp.json())
       .then(function(myJson) {
         renderListItemClick(myJson, cardArray);

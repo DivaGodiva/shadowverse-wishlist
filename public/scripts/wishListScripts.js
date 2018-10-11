@@ -76,9 +76,6 @@ const renderListItemKey = function(vari, dbId, pri) {
 const getSequence = function() {
   let data = ('<%= data %>');
   api.details('/wishList')
-    .then((response) => {
-      console.log(response);
-    })
     .catch(function(error) {
       console.log(error);
     });
@@ -125,7 +122,6 @@ cards.addEventListener('click', function(e) {
   } 
 });
 
-
 cards.addEventListener('click', function(e) {
   let editObj = {
     dbId: e.target.parentNode.parentNode.id,
@@ -137,7 +133,6 @@ cards.addEventListener('click', function(e) {
   if (e.target.innerHTML === 'Switch' && e.target.parentNode.parentNode.parentNode.id === 'low') {
     editObj.pri = 'high';
   }
-  console.log(editObj);
   if (e.target.innerHTML === 'Switch') {
     api.update('/wishList', editObj)
       .catch(function(error) {
@@ -145,22 +140,8 @@ cards.addEventListener('click', function(e) {
       });
     console.log('switched');
   }
+  window.location.reload();
 });
-
-// cards.addEventListener('change', function(e) {
-//   const cardObj = {
-//     cardId: e.target.parentNode.parentNode.childNodes[1].id,
-//     priority: e.target.value
-//   };
-//   if (e.target.tagName === 'SELECT') {
-//     api.create('/cardSearch', cardObj)
-//       .catch(function(error) {
-//         console.log(error);
-//       });
-//     console.log('added');
-//   }
-// });
-
 
 cards.addEventListener('click', function(e) {
   e.preventDefault();

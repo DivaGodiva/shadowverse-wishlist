@@ -59,7 +59,6 @@ module.exports = function(app, passport) {
         result = result.map(item => item.serialize());
         let datap = JSON.stringify(result);
         res.render('wishList', {user:req.user, data: datap});
-        // res.json(result);
       })
       .catch(function(error) {
         console.log(error);
@@ -70,7 +69,6 @@ module.exports = function(app, passport) {
     const {dbId} = req.body;
     Card.findOneAndDelete({ _id: dbId})
       .then(() => {
-        console.log(dbId);
         res.sendStatus(204);
       })
       .catch(function(error) {

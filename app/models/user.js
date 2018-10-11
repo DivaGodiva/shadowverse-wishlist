@@ -1,9 +1,9 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var bcrypt   = require('bcryptjs');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
-var userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   local: {
     username: String,
     password: String,

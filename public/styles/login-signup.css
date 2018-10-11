@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+  color: rgb(24,24,24);
+  font-family: Raleway;
+  margin: 0;
+  padding: 0;
+  background-image: url('/images/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  text-shadow: .5px .5px .5px white;
+}
+
+hr {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+.container {
+  width: 40em;
+  margin: 1rem auto;
+  padding: 4rem;
+  box-sizing: border-box;
+  border-radius: 1rem;  
+}
+
+.container h1:first-child::before {
+  content: "⭆ ";
+}
+
+.alert {
+  padding: 1.25em;
+  margin-bottom: 1.5em;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-danger {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.btn-lg {
+  padding: .5em 1em;
+  font-size: 1.5em;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.form-group {
+  margin-bottom: 1rem;   
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 0.5rem;
+}

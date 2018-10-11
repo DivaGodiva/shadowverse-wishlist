@@ -1,37 +1,15 @@
 <!DOCTYPE html>
 <html>
-
   <head>
       <title>Shadowverse List</title>
       <link rel="stylesheet" href="/styles/wishList.css" />
   </head>
-
   <body>
-
     <header>
-        <% include ./partials/navigation %>
-        <h1>Card List</h1>
+      <% include ./partials/navigation %>
+      <h1>Card List</h1>
     </header>
-    
     <main>
-
-      <section class="js-search-bar list-search">
-        <!-- <div class="js-filter">
-          <form class="js-search-form list-form hidden-search">
-            <label for="js-list-search">Search</label>
-            <input type="text" for="js-list-search" value="">
-          </form>
-        </div> -->
-        <!-- <div="js-filter">
-          <select>
-            <option selected disabled>Filter</option>
-            <option value="high">High</option>
-            <option value="mid">Mid</option>
-            <option value="low">Low</option>
-          </select>
-        </div> -->
-      </section>
-
       <section>
         <span id="db-info"><%= data %></span>
         <section id="cards">
@@ -41,17 +19,13 @@
           <hr>
           <span class="title">LOW</span>
           <ul id="low" class="card-holder"></ul>
-          </section>
+        </section>
       </section>
-
     </main>
-
     <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k="
       crossorigin="anonymous"></script>
     <script type="text/javascript" src="/scripts/api.js"></script>
     <script type="text/javascript" src="/scripts/wishListScripts.js"></script>
-
   </body>
-
 </html>

@@ -1,7 +1,7 @@
 'use strict';
 
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('../app/models/user');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('../app/models/user');
 
 module.exports = function(passport) {
 
@@ -29,9 +29,9 @@ module.exports = function(passport) {
         if (err)
           return done(err);
         if (user) {
-          return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+          return done(null, false, req.flash('signupMessage', 'That email is taken.'));
         } else {
-          var newUser = new User();
+          let newUser = new User();
           newUser.local.username = username;
           newUser.local.password = newUser.generateHash(password);
           newUser.save(function(err) {
@@ -57,9 +57,9 @@ module.exports = function(passport) {
       if (err)
         return done(err);
       if (!user)
-        return done(null, false, req.flash('loginMessage', 'No user found.')); 
+        return done(null, false, req.flash('loginMessage', 'Incorrect user or password.')); 
       if (!user.validPassword(password))
-        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); 
+        return done(null, false, req.flash('loginMessage', 'Incorrect user or password.')); 
       return done(null, user);
     });
   }));
