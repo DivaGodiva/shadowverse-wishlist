@@ -2,7 +2,7 @@
 'use strict';
 
 const cards = document.getElementById('card-holder');
-
+const selector = document.getElementById('scroll-select');
 const list = document.querySelector('#crafts');
 
 const cardCreator = function(imgUrl, nameUrl) {
@@ -10,7 +10,10 @@ const cardCreator = function(imgUrl, nameUrl) {
   let listEl = document.createElement('LI');
   let toolTip = document.createElement('SPAN');
   let addDiv = document.createElement('DIV');
-  let addButton = document.createElement('BUTTON');
+  let addButton = document.createElement('SELECT');
+  let optionUno = document.createElement('OPTION');
+  let optionDos = document.createElement('OPTION');
+  let optionTres = document.createElement('OPTION');
   img.setAttribute('src', `https://shadowverse-portal.com/image/card/en/C_${imgUrl}.png`);
   img.setAttribute('class', 'card-picture');
   listEl.setAttribute('id', `${nameUrl}`);
@@ -18,7 +21,19 @@ const cardCreator = function(imgUrl, nameUrl) {
   toolTip.setAttribute('id', `${imgUrl}`);
   toolTip.setAttribute('class', 'tooltip');
   addDiv.setAttribute('class', 'actions');
-  addButton.innerHTML = 'Add';
+  addButton.setAttribute('id', 'scroll-select');
+  optionUno.setAttribute('value', '');
+  optionUno.setAttribute('disabled', 'disabled');
+  optionUno.setAttribute('selected', 'selected');
+  optionUno.setAttribute('hidden', 'hidden');
+  optionUno.innerHTML = 'Add!';
+  optionDos.setAttribute('value', 'high');
+  optionDos.innerHTML = 'High';
+  optionTres.setAttribute('value', 'low');
+  optionTres.innerHTML = 'Low';
+  addButton.appendChild(optionUno);
+  addButton.appendChild(optionDos);
+  addButton.appendChild(optionTres);
   addDiv.appendChild(addButton);
   cards.appendChild(listEl);
   listEl.appendChild(img);
@@ -78,6 +93,7 @@ let cardArray = [];
 
 list.addEventListener('click', function(e) {
   e.preventDefault();
+  console.log(selector);
   document.querySelector('.js-search-form').classList.add('hidden-search');
   cardDeletor();
   cardArray = [];
@@ -113,16 +129,19 @@ document.querySelector('.card-form').addEventListener('submit', function(e) {
   e.preventDefault();
 });
 
-cards.addEventListener('click', function(e) {
-  e.preventDefault();
+cards.addEventListener('change', function(e) {
   const cardObj = {
-    cardId: e.target.parentNode.parentNode.childNodes[1].id
+    cardId: e.target.parentNode.parentNode.childNodes[1].id,
+    priority: e.target.value
   };
-  if (e.target.tagName === 'BUTTON') {
+
+  if (e.target.tagName === 'SELECT') {
+    console.log('change');
     api.create('/cardSearch', cardObj)
       .catch(function(error) {
         console.log(error);
       });
+    console.log(e.target);
     console.log('added');
   }
 });

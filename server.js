@@ -32,5 +32,23 @@ app.use(flash());
 
 require('./app/routes.js')(app, passport); 
 
+app.use((req, res, next) => {
+  const err = new Error('No Route');
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  if (err.status) {
+    const errBody = Object.assign({}, err, { message: err.message });
+    res.status(err.status).json(errBody);
+  } else {
+    res.status(500).json({ message: 'Internal Server Error' });
+    if (process.env.NODE_ENV !== 'test') {
+      console.error(err);
+    }
+  }
+});
+
 app.listen(port);
 console.log('STARTINNGGGGGG ' + port);

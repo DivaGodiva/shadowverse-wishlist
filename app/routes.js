@@ -41,9 +41,10 @@ module.exports = function(app, passport) {
   });
 
   app.post('/cardSearch', function(req, res) {
-    const {cardId} = req.body;
+    const {cardId, priority} = req.body;
     const userId = req.user.id;
-    const newCard = {userId, cardId};
+    const newCard = {userId, cardId, priority};
+
     Card.create(newCard)
       .then(result => {
         res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);

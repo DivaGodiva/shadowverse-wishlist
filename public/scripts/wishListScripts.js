@@ -1,10 +1,22 @@
 /* global api */
 'use strict';
 
-const cards = document.getElementById('card-holder');
+const cards = document.getElementById('cards');
+const high = document.getElementById('high');
+const low = document.getElementById('low');
 let dbCards = document.getElementById('db-info').innerHTML;
 
-const cardCreator = function(imgUrl, nameUrl, imgId, dbId) {
+const priorityCreator = function() {
+  let jsonArr = JSON.parse(dbCards);
+  let obj = {};
+  jsonArr.forEach(item => {
+    obj[item.id] = item.priority;
+  });
+  return obj;
+};
+
+const cardCreator = function(imgUrl, nameUrl, imgId, dbId, pri) {
+  let priority = pri[dbId];
   let img = document.createElement('IMG');
   let listEl = document.createElement('LI');
   let toolTip = document.createElement('SPAN');
@@ -22,7 +34,12 @@ const cardCreator = function(imgUrl, nameUrl, imgId, dbId) {
   removeButton.innerHTML = 'Del';
   addDiv.appendChild(editButton);
   addDiv.appendChild(removeButton);
-  cards.appendChild(listEl);
+  if (priority === 'high') {
+    high.appendChild(listEl);
+  }
+  if (priority === 'low') {
+    low.appendChild(listEl);
+  }
   listEl.appendChild(img);
   listEl.appendChild(toolTip);
   listEl.appendChild(addDiv);
@@ -45,15 +62,15 @@ const toolTipCreator = function(json) {
   return array2;
 };
 
-const useCardCreator = function(vari, dbId) {
-  cardCreator(vari.image, vari.name, vari.id, dbId);
+const useCardCreator = function(vari, dbId, pri) {
+  cardCreator(vari.image, vari.name, vari.id, dbId, pri);
   let descArray = toolTipCreator(vari);
   let desc = descArray.join('<br>');
   document.getElementById(vari.id).innerHTML = `${desc}`;
 };
 
-const renderListItemKey = function(vari, dbId) {
-  useCardCreator(vari.data.card, dbId);
+const renderListItemKey = function(vari, dbId, pri) {
+  useCardCreator(vari.data.card, dbId, pri);
 };
 
 const getSequence = function() {
@@ -74,12 +91,13 @@ const loadingSequence = function() {
     dbIdObj[item.id] = item.cardId;
   });
   let objKeyList = Object.keys(dbIdObj);
+  let priority = priorityCreator();
   Promise.all(objKeyList.map(item => {
     let url = `https://shadowverse-portal.com/api/v1/card?format=json&card_id=${dbIdObj[item]}`;
     fetch(url)
       .then((resp) => resp.json())
       .then(function(myJson) {
-        renderListItemKey(myJson, item);
+        renderListItemKey(myJson, item, priority);
       })
       .catch(function(error) {
         console.log(error);
@@ -104,8 +122,15 @@ cards.addEventListener('click', function(e) {
         console.log(error);
       });
     console.log('removed');
-  }
+  } 
 });
+
+
+// cards.addEventListener('click', function(e) {
+//   e.preventDefault();
+
+// });
+
 
 cards.addEventListener('click', function(e) {
   e.preventDefault();

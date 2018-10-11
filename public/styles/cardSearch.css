@@ -135,4 +135,9 @@ button {
   display: none;
 }
 
+ul#card-holder {
+  -webkit-padding-start: 1em;
+  -webkit-padding-end: 1em;
+}
+
 

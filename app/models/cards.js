@@ -5,7 +5,8 @@ var mongoose = require('mongoose');
 var cardSchema = mongoose.Schema({
   cardId: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  createdAt: { type: Number, default: Date.now } 
+  createdAt: { type: Number, default: Date.now },
+  priority: {type: String, required: true}
 });
 
 cardSchema.index({ cardId: 1, userId: 1 }, { unique: true });
@@ -14,7 +15,8 @@ cardSchema.methods.serialize = function() {
   return {
     cardId: this.cardId,
     id: this._id,
-    createdAt: this.createdAt
+    createdAt: this.createdAt,
+    priority: this.priority
   };
 };
 
