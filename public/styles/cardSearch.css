@@ -140,5 +140,12 @@ ul#card-holder {
   -webkit-padding-end: 1em;
 }
 
-
-
+select {
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  opacity: .75;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
