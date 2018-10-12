@@ -116,6 +116,17 @@ const prioritySwapper = function(element) {
   return editObj;
 };
 
+const swapAppender = function(element, obj) {
+  let switchTarget = element.target.parentNode.parentNode.cloneNode(true);
+  if (obj.pri === 'high') {
+    high.appendChild(switchTarget);
+  }
+  if (obj.pri === 'low') {
+    low.appendChild(switchTarget);
+  }
+  element.target.parentNode.parentNode.remove();
+};
+
 window.onload = function() {
   getSequence();
   loadingSequence();
@@ -144,14 +155,7 @@ cards.addEventListener('click', function(e) {
         console.log(error);
       });
     console.log('switched');
-    let switchTarget = e.target.parentNode.parentNode.cloneNode(true);
-    if (updObj.pri === 'high') {
-      high.appendChild(switchTarget);
-    }
-    if (updObj.pri === 'low') {
-      low.appendChild(switchTarget);
-    }
-    e.target.parentNode.parentNode.remove();
+    swapAppender(e, updObj);
   }
 });
 
