@@ -89,9 +89,9 @@ const loadingSequence = function() {
   });
   let objKeyList = Object.keys(dbIdObj);
   let priority = priorityCreator();
-  objKeyList.map(item => {
+  const promises = objKeyList.map(item => {
     let url = `/api/card/${dbIdObj[item]}`;
-    fetch(url)
+    const response = fetch(url)
       .then((resp) => resp.json())
       .then(function(myJson) {
         renderListItemKey(myJson, item, priority);
@@ -99,8 +99,31 @@ const loadingSequence = function() {
       .catch(function(error) {
         console.log(error);
       });
+    return response;
   });
+  console.log(promises);
+  Promise.all(promises);
 };
+
+// const loadingSequence = function() {
+//   let jsonArr = JSON.parse(dbCards);
+//   let dbIdObj = {};
+//   jsonArr.forEach(item => {
+//     dbIdObj[item.id] = item.cardId;
+//   });
+//   let objKeyList = Object.keys(dbIdObj);
+//   let priority = priorityCreator();
+//   let arr = [];
+//   const promises = objKeyList.map(item => {
+//     let url = `/api/card/${dbIdObj[item]}`;
+//     const response = fetch(url)
+//       .then((resp) => resp.json());
+//     console.log(response);
+//     return response;
+//   });
+//   console.log(promises);
+//   Promise.all(promises);
+// };
 
 const prioritySwapper = function(element) {
   let editObj = {

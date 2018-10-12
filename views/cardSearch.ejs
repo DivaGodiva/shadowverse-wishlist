@@ -10,6 +10,7 @@
     <header>
       <% include ./partials/navigation %>
       <h1>Card Search</h1>
+      <hr class="title-line">
     </header>
     <main>
       <section class="class-buttons">
@@ -44,9 +45,9 @@
         </ul>
       </section>
       <section class="js-search-bar card-search">
-        <form class="js-search-form card-form hidden-search">
+        <form class="js-search-form card-form">
           <label for="js-card-search">Search</label>
-          <input type="text" for="js-card-search" value="">
+          <input id="disable-search" class="grey-search" type="text" for="js-card-search" value="" disabled="disabled">
         </form>
       </section>
       <section class="cards">

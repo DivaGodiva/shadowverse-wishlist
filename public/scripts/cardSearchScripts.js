@@ -92,7 +92,6 @@ let cardArray = [];
 
 list.addEventListener('click', function(e) {
   e.preventDefault();
-  document.querySelector('.js-search-form').classList.add('hidden-search');
   cardDeletor();
   cardArray = [];
   if (e.target.tagName.toLowerCase() === 'img') { 
@@ -102,11 +101,15 @@ list.addEventListener('click', function(e) {
       .then((resp) => resp.json())
       .then(function(myJson) {
         renderListItemClick(myJson, cardArray);
-        document.querySelector('.js-search-form').classList.remove('hidden-search');
+        document.getElementById('disable-search').disabled = false;
+        document.getElementById('disable-search').classList.remove('grey-search');
       })
       .catch(function(error) {
         console.log(error);
       });
+  } else {
+    document.getElementById('disable-search').disabled = true;
+    document.getElementById('disable-search').classList.add('grey-search');
   }
 });
 

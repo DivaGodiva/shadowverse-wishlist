@@ -8,16 +8,17 @@
     <header>
       <% include ./partials/navigation %>
       <h1>Card List</h1>
+      <hr class="title-line">
     </header>
     <main>
       <section>
         <span id="db-info"><%= data %></span>
         <section id="cards">
           <span class="title">HIGH PRIORITY</span>
-          <hr>
+          <hr class="section-line">
           <ul id="high" class="card-holder"></ul>
           <span class="title">LOW PRIORITY</span>
-          <hr>
+          <hr class="section-line">
           <ul id="low" class="card-holder"></ul>
         </section>
       </section>

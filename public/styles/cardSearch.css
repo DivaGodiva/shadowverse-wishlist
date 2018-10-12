@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Raleway;
-  background-image: url('/images/nephy.png');
+  background-image: url('/images/background2.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -17,6 +17,9 @@ main, h1 {
 
 h1 {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  margin: 0;
+  margin-top: .5em;
 }
 
 .class-image {
@@ -131,8 +134,8 @@ button {
   opacity: .8;
 } 
 
-.hidden-search {
-  display: none;
+.grey-search {
+  background-color: grey;
 }
 
 ul#card-holder {
@@ -148,4 +151,12 @@ select {
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
   border-radius: 0px;
+}
+
+.title-line {
+  width: 15%;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, white, transparent);
+  margin-bottom: 1em;
 }
