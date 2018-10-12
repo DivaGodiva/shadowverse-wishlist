@@ -30,8 +30,8 @@ const cardCreator = function(imgUrl, nameUrl, imgId, dbId, pri) {
   toolTip.setAttribute('id', `${imgId}`);
   toolTip.setAttribute('class', 'tooltip');
   addDiv.setAttribute('class', 'actions');
-  editButton.innerHTML = 'Switch';
-  removeButton.innerHTML = 'Delete';
+  editButton.innerHTML = 'SWAP';
+  removeButton.innerHTML = 'DEL';
   addDiv.appendChild(editButton);
   addDiv.appendChild(removeButton);
   if (priority === 'high') {
@@ -90,7 +90,6 @@ const loadingSequence = function() {
   let objKeyList = Object.keys(dbIdObj);
   let priority = priorityCreator();
   objKeyList.map(item => {
-    // let url = `https://shadowverse-portal.com/api/v1/card?format=json&card_id=${dbIdObj[item]}`;
     let url = `/api/card/${dbIdObj[item]}`;
     fetch(url)
       .then((resp) => resp.json())
@@ -113,7 +112,7 @@ cards.addEventListener('click', function(e) {
   let removeObj = {
     dbId: e.target.parentNode.parentNode.id
   };
-  if (e.target.innerHTML === 'Delete') {
+  if (e.target.innerHTML === 'DEL') {
     e.target.parentNode.parentNode.remove();
     api.remove('/wishList', removeObj)
       .catch(function(error) {
@@ -128,19 +127,26 @@ cards.addEventListener('click', function(e) {
     dbId: e.target.parentNode.parentNode.id,
     pri: '',
   };
-  if (e.target.innerHTML === 'Switch' && e.target.parentNode.parentNode.parentNode.id === 'high') {
+  if (e.target.innerHTML === 'SWAP' && e.target.parentNode.parentNode.parentNode.id === 'high') {
     editObj.pri = 'low';
   }
-  if (e.target.innerHTML === 'Switch' && e.target.parentNode.parentNode.parentNode.id === 'low') {
+  if (e.target.innerHTML === 'SWAP' && e.target.parentNode.parentNode.parentNode.id === 'low') {
     editObj.pri = 'high';
   }
-  if (e.target.innerHTML === 'Switch') {
+  if (e.target.innerHTML === 'SWAP') {
     api.update('/wishList', editObj)
       .catch(function(error) {
         console.log(error);
       });
     console.log('switched');
-    window.location.reload();
+    let switchTarget = e.target.parentNode.parentNode.cloneNode(true);
+    if (editObj.pri === 'high') {
+      high.appendChild(switchTarget);
+    }
+    if (editObj.pri === 'low') {
+      low.appendChild(switchTarget);
+    }
+    e.target.parentNode.parentNode.remove();
   }
 });
 

@@ -3,6 +3,7 @@
 module.exports = function(app, passport) {
 
   const Card = require('./models/cards');
+  const request = require('request');
 
   //home
   app.get('/', function(req, res) {
@@ -51,6 +52,16 @@ module.exports = function(app, passport) {
       });
   });
 
+  app.get('/api/cards/:clanId', function(req, res) {
+    const URL = `https://shadowverse-portal.com/api/v1/cards?lang=en&format=json&clan=${req.params.clanId}`;
+    request({ url: URL }, function(error, response, body) {
+      if (error) {
+        console.log(error);
+      }
+      res.json(body);
+    });
+  });
+
   //wishlist
   app.get('/wishList', isLoggedIn, function(req, res) {
     const userId = req.user.id;
@@ -85,6 +96,16 @@ module.exports = function(app, passport) {
       .catch(function(error) {
         console.log(error);
       });
+  });
+
+  app.get('/api/card/:cardId', function(req, res) {
+    let url = `https://shadowverse-portal.com/api/v1/card?lang=en&format=json&card_id=${req.params.cardId}`;
+    request({ url: url}, function(error, response, body) {
+      if (error) {
+        console.log(error);
+      } 
+      res.json(body);
+    });
   });
 
   //logout

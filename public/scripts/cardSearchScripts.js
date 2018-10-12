@@ -2,7 +2,6 @@
 'use strict';
 
 const cards = document.getElementById('card-holder');
-const selector = document.getElementById('scroll-select');
 const list = document.querySelector('#crafts');
 
 const cardCreator = function(imgUrl, nameUrl) {
