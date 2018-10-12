@@ -102,6 +102,20 @@ const loadingSequence = function() {
   });
 };
 
+const prioritySwapper = function(element) {
+  let editObj = {
+    dbId: element.target.parentNode.parentNode.id,
+    pri: '',
+  };
+  if (element.target.innerHTML === 'SWAP' && element.target.parentNode.parentNode.parentNode.id === 'high') {
+    editObj.pri = 'low';
+  }
+  if (element.target.innerHTML === 'SWAP' && element.target.parentNode.parentNode.parentNode.id === 'low') {
+    editObj.pri = 'high';
+  }
+  return editObj;
+};
+
 window.onload = function() {
   getSequence();
   loadingSequence();
@@ -123,27 +137,18 @@ cards.addEventListener('click', function(e) {
 });
 
 cards.addEventListener('click', function(e) {
-  let editObj = {
-    dbId: e.target.parentNode.parentNode.id,
-    pri: '',
-  };
-  if (e.target.innerHTML === 'SWAP' && e.target.parentNode.parentNode.parentNode.id === 'high') {
-    editObj.pri = 'low';
-  }
-  if (e.target.innerHTML === 'SWAP' && e.target.parentNode.parentNode.parentNode.id === 'low') {
-    editObj.pri = 'high';
-  }
+  let updObj = prioritySwapper(e);
   if (e.target.innerHTML === 'SWAP') {
-    api.update('/wishList', editObj)
+    api.update('/wishList', updObj)
       .catch(function(error) {
         console.log(error);
       });
     console.log('switched');
     let switchTarget = e.target.parentNode.parentNode.cloneNode(true);
-    if (editObj.pri === 'high') {
+    if (updObj.pri === 'high') {
       high.appendChild(switchTarget);
     }
-    if (editObj.pri === 'low') {
+    if (updObj.pri === 'low') {
       low.appendChild(switchTarget);
     }
     e.target.parentNode.parentNode.remove();
