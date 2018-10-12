@@ -18,6 +18,9 @@ chai.use(chaiHttp);
 describe('SV Wishlist', function () {
   const username = 'exampleUser';
   const password = 'examplePass';
+  const userId = '000001111122222333334444';
+  const cardId = '101211030';
+  const priority = 'low';
 
   before(function () {
     return mongoose.connect(configDB.testUrl)
@@ -51,7 +54,7 @@ describe('SV Wishlist', function () {
         });
     });
   });
-  
+
   describe('Signup', function () {
     it('Should login with correct credentials', function () {
       return chai.request(app)
@@ -60,6 +63,18 @@ describe('SV Wishlist', function () {
         .then(res => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
+        });
+    });
+  });
+
+  describe('Cardsearch', function () {
+    it('Should post to wishlist', function () {
+      return chai.request(app)
+        .post('/cardSearch')
+        .send({userId, cardId, priority})
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
         });
     });
   });

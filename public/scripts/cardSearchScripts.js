@@ -48,7 +48,7 @@ const cardDeletor = function() {
 };
 
 const renderList = function(vari, list) {
-  const jsonObj = vari.data.cards;
+  const jsonObj = JSON.parse(vari).data.cards;
   jsonObj.forEach(el => {
     list.push(el);
   });
@@ -98,8 +98,8 @@ list.addEventListener('click', function(e) {
   cardArray = [];
   if (e.target.tagName.toLowerCase() === 'img') { 
     const cardClass = e.target.parentNode.getAttribute('data-class');
-    const URL = `https://shadowverse-portal.com/api/v1/cards?format=json&clan=${cardClass}`;
-    fetch(URL, {mode: 'cors'})
+    const URL = `/api/cards/${cardClass}`;
+    fetch(URL)
       .then((resp) => resp.json())
       .then(function(myJson) {
         renderListItemClick(myJson, cardArray);

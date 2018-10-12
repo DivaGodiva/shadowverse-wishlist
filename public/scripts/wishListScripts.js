@@ -70,7 +70,7 @@ const useCardCreator = function(vari, dbId, pri) {
 };
 
 const renderListItemKey = function(vari, dbId, pri) {
-  useCardCreator(vari.data.card, dbId, pri);
+  useCardCreator(JSON.parse(vari).data.card, dbId, pri);
 };
 
 const getSequence = function() {
@@ -89,8 +89,9 @@ const loadingSequence = function() {
   });
   let objKeyList = Object.keys(dbIdObj);
   let priority = priorityCreator();
-  Promise.all(objKeyList.map(item => {
-    let url = `https://shadowverse-portal.com/api/v1/card?format=json&card_id=${dbIdObj[item]}`;
+  objKeyList.map(item => {
+    // let url = `https://shadowverse-portal.com/api/v1/card?format=json&card_id=${dbIdObj[item]}`;
+    let url = `/api/card/${dbIdObj[item]}`;
     fetch(url)
       .then((resp) => resp.json())
       .then(function(myJson) {
@@ -99,7 +100,7 @@ const loadingSequence = function() {
       .catch(function(error) {
         console.log(error);
       });
-  }));
+  });
 };
 
 window.onload = function() {
@@ -139,8 +140,8 @@ cards.addEventListener('click', function(e) {
         console.log(error);
       });
     console.log('switched');
+    window.location.reload();
   }
-  window.location.reload();
 });
 
 cards.addEventListener('click', function(e) {

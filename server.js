@@ -33,6 +33,28 @@ app.use(flash());
 
 require('./app/routes.js')(app, passport); 
 
+app.get('/api/cards/:clanId', function(req, res) {
+  const request = require('request');
+  const URL = `https://shadowverse-portal.com/api/v1/cards?lang=en&format=json&clan=${req.params.clanId}`;
+  request({ url: URL }, function(error, response, body) {
+    if (error) {
+      //handle error
+    }
+    res.json(body);
+  });
+});
+
+app.get('/api/card/:cardId', function(req, res) {
+  const request = require('request');
+  let url = `https://shadowverse-portal.com/api/v1/card?lang=en&format=json&card_id=${req.params.cardId}`;
+  request({ url: url}, function(error, response, body) {
+    if (error) {
+      //handle error
+    } 
+    res.json(body);
+  });
+});
+
 app.use((req, res, next) => {
   const err = new Error('No Route');
   err.status = 404;
