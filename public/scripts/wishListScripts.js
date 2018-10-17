@@ -6,17 +6,10 @@ const high = document.getElementById('high');
 const low = document.getElementById('low');
 let dbCards = document.getElementById('db-info').innerHTML;
 
-const priorityCreator = function() {
-  let jsonArr = JSON.parse(dbCards);
-  let obj = {};
-  jsonArr.forEach(item => {
-    obj[item.id] = item.priority;
-  });
-  return obj;
-};
-
-const cardCreator = function(imgUrl, nameUrl, imgId, dbId, pri) {
-  let priority = pri[dbId];
+const cardCreator = function(vari, imgUrl, nameUrl, imgId, pri, dbId) {
+  let descArray = toolTipCreator(vari);
+  let desc = descArray.join('<br>');
+  let priority = pri;
   let img = document.createElement('IMG');
   let listEl = document.createElement('LI');
   let toolTip = document.createElement('SPAN');
@@ -29,6 +22,7 @@ const cardCreator = function(imgUrl, nameUrl, imgId, dbId, pri) {
   listEl.setAttribute('class', `card-display ${nameUrl}`);
   toolTip.setAttribute('id', `${imgId}`);
   toolTip.setAttribute('class', 'tooltip');
+  toolTip.innerHTML = `${desc}`;
   addDiv.setAttribute('class', 'actions');
   editButton.innerHTML = 'SWAP';
   removeButton.innerHTML = 'DEL';
@@ -62,15 +56,8 @@ const toolTipCreator = function(json) {
   return array2;
 };
 
-const useCardCreator = function(vari, dbId, pri) {
-  cardCreator(vari.image, vari.name, vari.id, dbId, pri);
-  let descArray = toolTipCreator(vari);
-  let desc = descArray.join('<br>');
-  document.getElementById(vari.id).innerHTML = `${desc}`;
-};
-
-const renderListItemKey = function(vari, dbId, pri) {
-  useCardCreator(JSON.parse(vari).data.card, dbId, pri);
+const useCardCreator = function(vari, pri, dbId) {
+  cardCreator(vari, vari.image, vari.name, vari.id, pri, dbId);
 };
 
 const getSequence = function() {
@@ -85,45 +72,26 @@ const loadingSequence = function() {
   let jsonArr = JSON.parse(dbCards);
   let dbIdObj = {};
   jsonArr.forEach(item => {
-    dbIdObj[item.id] = item.cardId;
+    dbIdObj[item.id] = {
+      id: item.cardId,
+      priority: item.priority
+    };
   });
-  let objKeyList = Object.keys(dbIdObj);
-  let priority = priorityCreator();
-  const promises = objKeyList.map(item => {
-    let url = `/api/card/${dbIdObj[item]}`;
-    const response = fetch(url)
-      .then((resp) => resp.json())
-      .then(function(myJson) {
-        renderListItemKey(myJson, item, priority);
-      })
-      .catch(function(error) {
-        console.log(error);
+  const promises = Object.values(dbIdObj).map(item => {
+    let url = `/api/card/${item.id}`;
+    return fetch(url)
+      .then(resp => resp.json());
+  });
+  return Promise.all(promises)
+    .then((resp) => {
+      resp.forEach((r, i) => {
+        let testP = JSON.parse(r).data.card;
+        let priority = dbIdObj[Object.keys(dbIdObj)[i]].priority;
+        let dbId = Object.keys(dbIdObj)[i];
+        useCardCreator(testP, priority, dbId);
       });
-    return response;
-  });
-  console.log(promises);
-  Promise.all(promises);
+    });
 };
-
-// const loadingSequence = function() {
-//   let jsonArr = JSON.parse(dbCards);
-//   let dbIdObj = {};
-//   jsonArr.forEach(item => {
-//     dbIdObj[item.id] = item.cardId;
-//   });
-//   let objKeyList = Object.keys(dbIdObj);
-//   let priority = priorityCreator();
-//   let arr = [];
-//   const promises = objKeyList.map(item => {
-//     let url = `/api/card/${dbIdObj[item]}`;
-//     const response = fetch(url)
-//       .then((resp) => resp.json());
-//     console.log(response);
-//     return response;
-//   });
-//   console.log(promises);
-//   Promise.all(promises);
-// };
 
 const prioritySwapper = function(element) {
   let editObj = {
