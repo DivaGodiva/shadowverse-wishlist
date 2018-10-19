@@ -15,12 +15,14 @@ const cardCreator = function(imgUrl, nameUrl) {
   let optionTres = document.createElement('OPTION');
   img.setAttribute('src', `https://shadowverse-portal.com/image/card/en/C_${imgUrl}.png`);
   img.setAttribute('class', 'card-picture');
+  img.setAttribute('alt', `${nameUrl}`);
   listEl.setAttribute('id', `${nameUrl}`);
   listEl.setAttribute('class', 'card-display');
   toolTip.setAttribute('id', `${imgUrl}`);
   toolTip.setAttribute('class', 'tooltip');
   addDiv.setAttribute('class', 'actions');
-  addButton.setAttribute('id', 'scroll-select');
+  addButton.setAttribute('class', 'scroll-select');
+  addButton.setAttribute('aria-label', 'select');
   optionUno.setAttribute('value', '');
   optionUno.setAttribute('disabled', 'disabled');
   optionUno.setAttribute('selected', 'selected');

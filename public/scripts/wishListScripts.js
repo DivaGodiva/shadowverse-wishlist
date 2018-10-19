@@ -18,6 +18,7 @@ const cardCreator = function(vari, imgUrl, nameUrl, imgId, pri, dbId) {
   let removeButton = document.createElement('BUTTON');
   img.setAttribute('src', `${imgUrl}`);
   img.setAttribute('class', 'card-picture');
+  img.setAttribute('alt', `${nameUrl}`);
   listEl.setAttribute('id', `${dbId}`);
   listEl.setAttribute('class', `card-display ${nameUrl}`);
   toolTip.setAttribute('id', `${imgId}`);
@@ -85,10 +86,10 @@ const loadingSequence = function() {
   return Promise.all(promises)
     .then((resp) => {
       resp.forEach((r, i) => {
-        let testP = JSON.parse(r).data.card;
+        let parsedJson = JSON.parse(r).data.card;
         let priority = dbIdObj[Object.keys(dbIdObj)[i]].priority;
         let dbId = Object.keys(dbIdObj)[i];
-        useCardCreator(testP, priority, dbId);
+        useCardCreator(parsedJson, priority, dbId);
       });
     });
 };
