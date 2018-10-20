@@ -1,3 +1,10 @@
 language: node_js
 node_js: node
 services: mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: rsD1iNQQ16wY/TWhtNouAXc9P2P/kCdd4u1491ViG6DIyxXJbcqyhvIpRMm5hAI6zP1HlcDf3ppwr5uEFdPNe86dG9zg+yPO4mPumA/aJ6B7OjTNzLRndndQ5Op9GbFurgKUDq1DD66T61s7CynYRPIzUe1DXIzosepepTEj17fkkjvWkC3GqTkzG2yj7Cl6bxaN9AnEpwdhDviLQOdnOHAfxQlnJYnsDSqMMUkdQATsAq1qwykaJ+GRLt47wN3WhGVA9h2fMkqzYNIv1vK6jSu/ZMrf0/r/7D31A2VTRrSRe/3F8KBGkCG7b5rXi9VVgZHJu7/z9PQZatd4NFSPVntAVoEDZdS+idlkgz71ZV+x8HaHFAKHtCbtllNIDWq3O+XmyhDMdeZIbmXKldQvUCpiLrBa+r827m9nBkF+RiD9aCwb5fCkVF5qn1H0Xmo3663nLomdKtH9Hp9kBv5iebmTifNhU7l5F7lSA26MQktp9QvPwmlNq5Kb+dPfTUkTAnrdhMPmTxhXZAsZsnWXewR9i6KI4YpcCitxnxjO1WRFJ/Kyai+N47/9KBhMnKT+hFfEC+5uyBtaSmnoQUczT5kBOqNcqYhP4PZ0zOyJvsAvXYq3Hs9CeDDqN5z9xXABR2bBH4GjkwuVYAAlwvuAdChh2eypsSGIRvuABnyC6ro=
+  app: warm-hamlet-29500
+  on:
+    repo: DivaGodiva/shadowverse-wishlist
