@@ -19,8 +19,8 @@ describe('SV Wishlist', function () {
   const username = 'exampleUser';
   const password = 'examplePass';
   // const userId = '000001111122222333334444';/
-  const cardId = '101211030';
-  const priority = 'low';
+  // const cardId = '101211030';
+  // const priority = 'low';
 
   before(function () {
     return mongoose.connect(configDB.testUrl)
@@ -69,9 +69,13 @@ describe('SV Wishlist', function () {
 
   describe('Cardsearch', function () {
     it('Should post to wishlist', function () {
+      const newItem = {
+        cardId: '101211030',
+        priority: 'low'
+      };
       return chai.request(app)
         .post('/cardSearch')
-        .send({cardId, priority})
+        .send(newItem)
         .then(res => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
