@@ -18,7 +18,7 @@ chai.use(chaiHttp);
 describe('SV Wishlist', function () {
   const username = 'exampleUser';
   const password = 'examplePass';
-  const userId = '000001111122222333334444';
+  // const userId = '000001111122222333334444';/
   const cardId = '101211030';
   const priority = 'low';
 
@@ -71,7 +71,7 @@ describe('SV Wishlist', function () {
     it('Should post to wishlist', function () {
       return chai.request(app)
         .post('/cardSearch')
-        .send({userId, cardId, priority})
+        .send({cardId, priority})
         .then(res => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
