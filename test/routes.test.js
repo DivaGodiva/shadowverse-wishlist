@@ -66,7 +66,7 @@ describe('SV Wishlist', function () {
   });
 
   describe('Cardsearch', function () {
-    it('Should post to wishlist', function () {
+    it('Should get cardsearch', function () {
       return chai.request(app)
         .get('/cardSearch')
         .then(res => {
@@ -74,7 +74,7 @@ describe('SV Wishlist', function () {
           expect(res).to.be.json;
         });
     });
-    it('Should post to wishlist', function () {
+    it('Should post to cardsearch', function () {
       const newItem = {
         cardId: '101211030',
         priority: 'low'
