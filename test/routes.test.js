@@ -96,9 +96,11 @@ describe('SV Wishlist', function () {
         chai.request(app)
           .get('/wishList')
       ])
-        .then((res) => {
+        .then(([data, res]) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
+          expect(res.body).to.be.a('array');
+          expect(res.body).to.have.length(data.length);
         });
     });
     // it('Should switch item from wishlist', function () {
