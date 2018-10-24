@@ -91,36 +91,14 @@ describe('SV Wishlist', function () {
 
   describe('Wishlist', function () {
     it('Should get wishlist', function () {
-      return chai.request(app)
-        .get('/wishLIst')
-        .then(res => {
+      return Promise.all([
+        Card.find({ userId: user.id }),
+        chai.request(app)
+          .get('/wishList')
+      ])
+        .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-        });
-    });
-    it('Should remove item from wishlist', function () {
-      const newItem = {
-        cardId: '101211030',
-        priority: 'low'
-      };
-      return chai.request(app)
-        .post('/wishList')
-        .send(newItem)
-        .then(res => {
-          expect(res).to.have.status(200);
-          expect(res).to.be.json;
-        });
-    });
-    it('Should remove item from wishlist 2', function () {
-      let data;
-      return Card.findOne({ userId: user.id })
-        .then(_data => {
-          data = _data;
-          return chai.request(app)
-            .delete(`/api/notes/${data.id}`);
-        })
-        .then(res => {
-          expect(res).to.have.status(204);
         });
     });
     // it('Should switch item from wishlist', function () {
