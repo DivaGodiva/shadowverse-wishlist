@@ -95,6 +95,7 @@ describe('SV Wishlist', function () {
         Card.find({ userId: user.id }),
         chai.request(app)
           .get('/wishList')
+          .set('Content-Type', 'application/json')  
       ])
         .then(([data, res]) => {
           expect(res).to.have.status(200);
