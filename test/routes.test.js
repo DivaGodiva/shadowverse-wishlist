@@ -41,26 +41,7 @@ describe('SV Wishlist', function () {
     return mongoose.disconnect();
   });
 
-  describe('Home', function () {
-    it('Should get index/home', function () {
-      return chai.request(app)
-        .get('/')
-        .then(res => {
-          expect(res).to.have.status(200);
-          expect(res).to.be.json;
-        });
-    });
-  });
-
   describe('Signup', function () {
-    it('Should get login page', function () {
-      return chai.request(app)
-        .get('/signup')
-        .then(res => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('object');
-        });
-    });
     it('Should create a new user with valid info', function () {
       return chai.request(app)
         .post('/signup')
@@ -73,14 +54,6 @@ describe('SV Wishlist', function () {
   });
 
   describe('Login', function () {
-    it('Should get login page', function () {
-      return chai.request(app)
-        .get('/login')
-        .then(res => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('object');
-        });
-    });
     it('Should login with correct credentials', function () {
       return chai.request(app)
         .post('/login')
