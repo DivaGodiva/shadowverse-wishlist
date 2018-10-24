@@ -18,9 +18,7 @@ chai.use(chaiHttp);
 describe('SV Wishlist', function () {
   const username = 'exampleUser';
   const password = 'examplePass';
-  // const userId = '000001111122222333334444';/
-  // const cardId = '101211030';
-  // const priority = 'low';
+  let user = {};
 
   before(function () {
     return mongoose.connect(configDB.testUrl)
@@ -43,7 +41,26 @@ describe('SV Wishlist', function () {
     return mongoose.disconnect();
   });
 
-  describe('Login', function () {
+  describe('Home', function () {
+    it('Should get index/home', function () {
+      return chai.request(app)
+        .get('/')
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+        });
+    });
+  });
+
+  describe('Signup', function () {
+    it('Should get login page', function () {
+      return chai.request(app)
+        .get('/signup')
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+        });
+    });
     it('Should create a new user with valid info', function () {
       return chai.request(app)
         .post('/signup')
@@ -55,7 +72,15 @@ describe('SV Wishlist', function () {
     });
   });
 
-  describe('Signup', function () {
+  describe('Login', function () {
+    it('Should get login page', function () {
+      return chai.request(app)
+        .get('/login')
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+        });
+    });
     it('Should login with correct credentials', function () {
       return chai.request(app)
         .post('/login')
@@ -69,6 +94,14 @@ describe('SV Wishlist', function () {
 
   describe('Cardsearch', function () {
     it('Should post to wishlist', function () {
+      return chai.request(app)
+        .get('/cardSearch')
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+        });
+    });
+    it('Should post to wishlist', function () {
       const newItem = {
         cardId: '101211030',
         priority: 'low'
@@ -77,9 +110,59 @@ describe('SV Wishlist', function () {
         .post('/cardSearch')
         .send(newItem)
         .then(res => {
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(201);
           expect(res).to.be.json;
         });
     });
   });
+
+  describe('Wishlist', function () {
+    it('Should get wishlist', function () {
+      return chai.request(app)
+        .get('/wishLIst')
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+        });
+    });
+    it('Should remove item from wishlist', function () {
+      const newItem = {
+        cardId: '101211030',
+        priority: 'low'
+      };
+      return chai.request(app)
+        .post('/wishList')
+        .send(newItem)
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+        });
+    });
+    it('Should remove item from wishlist 2', function () {
+      let data;
+      return Card.findOne({ userId: user.id })
+        .then(_data => {
+          data = _data;
+          return chai.request(app)
+            .delete(`/api/notes/${data.id}`);
+        })
+        .then(res => {
+          expect(res).to.have.status(204);
+        });
+    });
+    // it('Should switch item from wishlist', function () {
+    //   const newItem = {
+    //     cardId: '101211030',
+    //     priority: 'low'
+    //   };
+    //   return chai.request(app)
+    //     .post('/wishList')
+    //     .send(newItem)
+    //     .then(res => {
+    //       expect(res).to.have.status(200);
+    //       expect(res).to.be.json;
+    //     });
+    // });
+  });
+
 });
