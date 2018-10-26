@@ -19,12 +19,12 @@ mongoose.set('useFindAndModify', false);
 
 require('./config/passport')(passport); 
 
-app.set('view engine', 'ejs'); 
-
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser()); 
+
+app.set('view engine', 'ejs'); 
 
 app.use(session({ secret: 'ilikethething' })); 
 app.use(passport.initialize());
