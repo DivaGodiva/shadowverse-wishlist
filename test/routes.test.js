@@ -28,7 +28,6 @@ describe('SV Wishlist', function () {
   beforeEach(function () {
     return Promise.all([
       User.insertMany(seedUsers),
-      User.createIndexes(),
       Card.insertMany(seedCards),
     ]);
   });
@@ -65,7 +64,7 @@ describe('SV Wishlist', function () {
     });
   });
 
-  describe('Cardsearch', function () {
+  describe.only('Cardsearch', function () {
     it('Should get cardsearch', function () {
       const agent = chai.request.agent(app);
       agent.post('/login')
