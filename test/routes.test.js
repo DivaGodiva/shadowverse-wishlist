@@ -16,9 +16,9 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('SV Wishlist', function () {
+
   const username = 'exampleUser';
   const password = 'examplePass';
-  let user = {};
 
   before(function () {
     return mongoose.connect(configDB.testUrl)
@@ -59,7 +59,7 @@ describe('SV Wishlist', function () {
         .post('/login')
         .send({username, password})
         .then(res => {
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(20000);
           expect(res.body).to.be.an('object');
         });
     });
@@ -67,56 +67,77 @@ describe('SV Wishlist', function () {
 
   describe('Cardsearch', function () {
     it('Should get cardsearch', function () {
-      return chai.request(app)
-        .get('/cardSearch')
-        .then(res => {
-          expect(res).to.have.status(200);
-          expect(res).to.be.json;
+      const agent = chai.request.agent(app);
+      agent.post('/login')
+        .send({username: 'admin', password: 'admin'})
+        .then(function () {
+          return agent.get('/cardSearch')
+            .then(function (res) {
+              expect(res).to.have.status(200);
+            });
         });
     });
     it('Should post to cardsearch', function () {
+      const agent = chai.request.agent(app);
       const newItem = {
         cardId: '101211030',
         priority: 'low'
       };
-      return chai.request(app)
-        .post('/cardSearch')
-        .send(newItem)
-        .then(res => {
-          expect(res).to.have.status(201);
-          expect(res).to.be.json;
+      agent.post('/login')
+        .send({username: 'admin', password: 'admin'})
+        .then(function () {
+          return agent.post('/cardSearch')
+            .send(newItem)
+            .then(function (res) {   
+              expect(res).to.have.status(201);
+              expect(res).to.be.json;
+              expect(res.body).to.be.a('object');
+            });
         });
     });
   });
 
   describe('Wishlist', function () {
     it('Should get wishlist', function () {
-      return Promise.all([
-        Card.find({ userId: user.id }),
-        chai.request(app)
-          .get('/wishList')
-          .set('Content-Type', 'application/json')  
-      ])
-        .then(([data, res]) => {
-          expect(res).to.have.status(200);
-          expect(res).to.be.json;
-          expect(res.body).to.be.a('array');
-          expect(res.body).to.have.length(data.length);
+      const agent = chai.request.agent(app);
+      agent.post('/login')
+        .send({username: 'admin', password: 'admin'})
+        .then(function () {
+          return agent.get('/wishList')
+            .then(function (res) {
+              expect(res).to.have.status(200);
+            });
         });
     });
-    // it('Should switch item from wishlist', function () {
-    //   const newItem = {
-    //     cardId: '101211030',
-    //     priority: 'low'
-    //   };
-    //   return chai.request(app)
-    //     .post('/wishList')
-    //     .send(newItem)
-    //     .then(res => {
-    //       expect(res).to.have.status(200);
-    //       expect(res).to.be.json;
-    //     });
-    // });
+    it('Should edit wishlist', function () {
+      const agent = chai.request.agent(app);
+      const updateItem = {
+        dbId: '000000000000000000000000',
+        pri: 'high'
+      };
+      agent.post('/login')
+        .send({username: 'admin', password: 'admin'})
+        .then(function () {
+          return agent.put('/wishList')
+            .send(updateItem)
+            .then(function (res) {   
+              expect(res).to.have.status(200);
+              expect(res).to.be.json;
+            });
+        });
+    });
+    it('Should delete item in wishlist', function () {
+      const agent = chai.request.agent(app);
+      agent.post('/login')
+        .send({username: 'admin', password: 'admin'})
+        .then(function () {
+          return agent.delete('/wishList')
+            .send({dbId: '000000000000000000000001'})
+            .then(function (res) {
+              expect(res).to.have.status(204);
+            });
+        });
+    });
   });
 
 });

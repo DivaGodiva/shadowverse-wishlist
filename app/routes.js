@@ -45,6 +45,7 @@ module.exports = function(app, passport) {
     const newCard = {userId, cardId, priority};
     Card.create(newCard)
       .then(result => {
+        console.log(result);
         res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
       })
       .catch(function(error) {
@@ -76,7 +77,7 @@ module.exports = function(app, passport) {
       });
   });
 
-  app.delete('/wishList', isLoggedIn, function(req, res) {
+  app.delete('/wishList', function(req, res) {
     const {dbId} = req.body;
     Card.findOneAndDelete({ _id: dbId})
       .then(() => {
@@ -87,7 +88,7 @@ module.exports = function(app, passport) {
       });
   });
 
-  app.put('/wishList', isLoggedIn, function(req, res) {
+  app.put('/wishList', function(req, res) {
     const {dbId, pri} = req.body;
     Card.findOneAndUpdate({_id: dbId}, {priority: pri}, {new: true})
       .then(result => {
