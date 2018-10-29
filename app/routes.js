@@ -7,18 +7,12 @@ module.exports = function(app, passport) {
 
   //home
   app.get('/', function(req, res) {
-    res.render('index')
-      .catch(function(error) {
-        console.log(error);
-      });
+    res.render('index');
   });
 
   //login
   app.get('/login', function(req, res) {
-    res.render('login', { message: req.flash('loginMessage') })
-      .catch(function(error) {
-        console.log(error);
-      });
+    res.render('login', { message: req.flash('loginMessage') });
   });
 
   app.post('/login', passport.authenticate('local-login', {
@@ -29,10 +23,7 @@ module.exports = function(app, passport) {
 
   //signup
   app.get('/signup', function(req, res) {
-    res.render('signup', { message: req.flash('signupMessage') })
-      .catch(function(error) {
-        console.log(error);
-      });
+    res.render('signup', { message: req.flash('signupMessage') });
   });
 
   app.post('/signup', passport.authenticate('local-signup', {
@@ -45,10 +36,7 @@ module.exports = function(app, passport) {
   app.get('/cardSearch', isLoggedIn, function(req, res) {
     res.render('cardSearch', {
       user : req.user 
-    })
-      .catch(function(error) {
-        console.log(error);
-      });
+    });
   });
 
   app.post('/cardSearch', function(req, res) {
@@ -130,7 +118,6 @@ module.exports = function(app, passport) {
 
 //login-check
 function isLoggedIn(req, res, next) {
-  console.log(req.isAuthenticated());
   if (req.isAuthenticated())
     return next();
   res.redirect('/');
