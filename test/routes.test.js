@@ -58,13 +58,13 @@ describe('SV Wishlist', function () {
         .post('/login')
         .send({username, password})
         .then(res => {
-          expect(res).to.have.status(20000);
+          expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
         });
     });
   });
 
-  describe.only('Cardsearch', function () {
+  describe('Cardsearch', function () {
     it('Should get cardsearch', function () {
       const agent = chai.request.agent(app);
       agent.post('/login')
