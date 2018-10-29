@@ -25,11 +25,7 @@ module.exports = function(app, passport) {
     successRedirect : '/cardSearch', 
     failureRedirect : '/login',
     failureFlash : true // allow flash messages
-  })
-    .catch(function(error) {
-      console.log(error);
-    })
-  );
+  }));
 
   //signup
   app.get('/signup', function(req, res) {
@@ -43,11 +39,7 @@ module.exports = function(app, passport) {
     successRedirect : '/cardSearch', 
     failureRedirect : '/signup',
     failureFlash : true // allow flash messages
-  })
-    .catch(function(error) {
-      console.log(error);
-    })
-  );
+  }));
 
   //cardsearch
   app.get('/cardSearch', isLoggedIn, function(req, res) {
