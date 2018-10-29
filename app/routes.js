@@ -7,36 +7,56 @@ module.exports = function(app, passport) {
 
   //home
   app.get('/', function(req, res) {
-    res.render('index'); 
+    res.render('index')
+      .catch(function(error) {
+        console.log(error);
+      });
   });
 
   //login
   app.get('/login', function(req, res) {
-    res.render('login', { message: req.flash('loginMessage') }); 
+    res.render('login', { message: req.flash('loginMessage') })
+      .catch(function(error) {
+        console.log(error);
+      });
   });
 
   app.post('/login', passport.authenticate('local-login', {
     successRedirect : '/cardSearch', 
     failureRedirect : '/login',
     failureFlash : true // allow flash messages
-  }));
+  })
+    .catch(function(error) {
+      console.log(error);
+    })
+  );
 
   //signup
   app.get('/signup', function(req, res) {
-    res.render('signup', { message: req.flash('signupMessage') });
+    res.render('signup', { message: req.flash('signupMessage') })
+      .catch(function(error) {
+        console.log(error);
+      });
   });
 
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/cardSearch', 
     failureRedirect : '/signup',
     failureFlash : true // allow flash messages
-  }));
+  })
+    .catch(function(error) {
+      console.log(error);
+    })
+  );
 
   //cardsearch
   app.get('/cardSearch', isLoggedIn, function(req, res) {
     res.render('cardSearch', {
       user : req.user 
-    });
+    })
+      .catch(function(error) {
+        console.log(error);
+      });
   });
 
   app.post('/cardSearch', function(req, res) {
