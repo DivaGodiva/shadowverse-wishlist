@@ -37,6 +37,7 @@ module.exports = function(app, passport) {
     res.render('cardSearch', {
       user : req.user 
     });
+    res.end();
   });
 
   app.post('/cardSearch', function(req, res) {
