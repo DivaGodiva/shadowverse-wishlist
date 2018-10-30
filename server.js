@@ -51,7 +51,13 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(port);
-console.log('STARTINNGGGGGG ' + port);
+// app.listen(port);
+// console.log('STARTINNGGGGGG ' + port);
+
+app.listen(port, function () {
+  console.info(`Server listening on ${this.address().port}`);
+}).on('error', err => {
+  console.error(err);
+});
 
 module.exports = app;
