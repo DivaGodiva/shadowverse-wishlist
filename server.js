@@ -14,7 +14,7 @@ const session = require('express-session');
 
 const configDB = require('./config/database.js');
 
-mongoose.connect(configDB.url); 
+// mongoose.connect(configDB.url); 
 mongoose.set('useFindAndModify', false);
 
 require('./config/passport')(passport); 
@@ -54,10 +54,27 @@ app.use((err, req, res, next) => {
 // app.listen(port);
 // console.log('STARTINNGGGGGG ' + port);
 
-app.listen(port, function () {
-  console.info(`Server listening on ${this.address().port}`);
-}).on('error', err => {
-  console.error(err);
-});
+// app.listen(port, function () {
+//   console.info(`Server listening on ${this.address().port}`);
+// }).on('error', err => {
+//   console.error(err);
+// });
+
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(configDB.url)
+    .then(instance => {
+      const conn = instance.connections[0];
+      console.info(`Connected to: mongodb://${conn.host}:${conn.port}/${conn.name}`);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+  app.listen(port, function () {
+    console.info(`Server listening on ${this.address().port}`);
+  }).on('error', err => {
+    console.error(err);
+  });
+}
 
 module.exports = app;
