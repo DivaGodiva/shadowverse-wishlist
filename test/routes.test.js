@@ -76,24 +76,24 @@ describe('SV Wishlist', function () {
             });
         });
     });
-    it('Should post to cardsearch', function () {
-      const agent = chai.request.agent(app);
-      const newItem = {
-        cardId: '101211030',
-        priority: 'low'
-      };
-      agent.post('/login')
-        .send({username: 'admin', password: 'admin'})
-        .then(function () {
-          return agent.post('/cardSearch')
-            .send(newItem)
-            .then(function (res) {   
-              expect(res).to.have.status(201);
-              expect(res).to.be.json;
-              expect(res.body).to.be.a('object');
-            });
-        });
-    });
+    // it('Should post to cardsearch', function () {
+    //   const agent = chai.request.agent(app);
+    //   const newItem = {
+    //     cardId: '101211030',
+    //     priority: 'low'
+    //   };
+    //   agent.post('/login')
+    //     .send({username: 'admin', password: 'admin'})
+    //     .then(function () {
+    //       return agent.post('/cardSearch')
+    //         .send(newItem)
+    //         .then(function (res) {   
+    //           expect(res).to.have.status(201);
+    //           expect(res).to.be.json;
+    //           expect(res.body).to.be.a('object');
+    //         });
+    //     });
+    // });
   });
 
   describe('Wishlist', function () {
