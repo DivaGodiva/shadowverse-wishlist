@@ -48,7 +48,6 @@ describe('SV Wishlist', function () {
         .then(res => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
-          res.end();
         });
     });
   });
