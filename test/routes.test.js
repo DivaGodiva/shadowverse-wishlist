@@ -1,16 +1,16 @@
 'use strict';
 
-const app = require('../server');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-const configDB = require('../config/database.js');
 
 const User = require('../app/models/user');
 const Card = require('../app/models/cards');
 
 const seedCards = require('../db/seed/cards');
 const seedUsers = require('../db/seed/users');
+const configDB = require('../config/database.js');
+const { app, runServer, closeServer } = require('../server');
 
 const expect = chai.expect;
 chai.use(chaiHttp);
@@ -21,15 +21,14 @@ describe('SV Wishlist', function () {
   const password = 'examplePass';
 
   before(function () {
-    return mongoose.connect(configDB.testUrl)
-      .then(() => mongoose.connection.db.dropDatabase());
+    return runServer(configDB.testUrl);
   });
 
   beforeEach(function () {
-    return Promise.all([
-      User.insertMany(seedUsers),
-      Card.insertMany(seedCards),
-    ]);
+    return User.insertMany(seedUsers)
+      .then(() => {
+        return Card.insertMany(seedCards);
+      });
   });
 
   afterEach(function () {
@@ -37,7 +36,7 @@ describe('SV Wishlist', function () {
   });
 
   after(function () {
-    return mongoose.disconnect();
+    return closeServer();
   });
 
   describe('Signup', function () {
@@ -67,7 +66,7 @@ describe('SV Wishlist', function () {
   describe('Cardsearch', function () {
     it('Should get cardsearch', function () {
       const agent = chai.request.agent(app);
-      agent.post('/login')
+      return agent.post('/login')
         .send({username: 'admin', password: 'admin'})
         .then(function () {
           return agent.get('/cardSearch')
@@ -76,30 +75,12 @@ describe('SV Wishlist', function () {
             });
         });
     });
-    // it('Should post to cardsearch', function () {
-    //   const agent = chai.request.agent(app);
-    //   const newItem = {
-    //     cardId: '101211030',
-    //     priority: 'low'
-    //   };
-    //   agent.post('/login')
-    //     .send({username: 'admin', password: 'admin'})
-    //     .then(function () {
-    //       return agent.post('/cardSearch')
-    //         .send(newItem)
-    //         .then(function (res) {   
-    //           expect(res).to.have.status(201);
-    //           expect(res).to.be.json;
-    //           expect(res.body).to.be.a('object');
-    //         });
-    //     });
-    // });
   });
 
   describe('Wishlist', function () {
     it('Should get wishlist', function () {
       const agent = chai.request.agent(app);
-      agent.post('/login')
+      return agent.post('/login')
         .send({username: 'admin', password: 'admin'})
         .then(function () {
           return agent.get('/wishList')
@@ -114,7 +95,7 @@ describe('SV Wishlist', function () {
         dbId: '000000000000000000000000',
         pri: 'high'
       };
-      agent.post('/login')
+      return agent.post('/login')
         .send({username: 'admin', password: 'admin'})
         .then(function () {
           return agent.put('/wishList')
@@ -127,7 +108,7 @@ describe('SV Wishlist', function () {
     });
     it('Should delete item in wishlist', function () {
       const agent = chai.request.agent(app);
-      agent.post('/login')
+      return agent.post('/login')
         .send({username: 'admin', password: 'admin'})
         .then(function () {
           return agent.delete('/wishList')
