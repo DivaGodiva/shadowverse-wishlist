@@ -2,11 +2,11 @@ language: node_js
 node_js: node
 services: mongodb
 before_script:
-  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+- mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 deploy:
   provider: heroku
   api_key:
-    secure: rsD1iNQQ16wY/TWhtNouAXc9P2P/kCdd4u1491ViG6DIyxXJbcqyhvIpRMm5hAI6zP1HlcDf3ppwr5uEFdPNe86dG9zg+yPO4mPumA/aJ6B7OjTNzLRndndQ5Op9GbFurgKUDq1DD66T61s7CynYRPIzUe1DXIzosepepTEj17fkkjvWkC3GqTkzG2yj7Cl6bxaN9AnEpwdhDviLQOdnOHAfxQlnJYnsDSqMMUkdQATsAq1qwykaJ+GRLt47wN3WhGVA9h2fMkqzYNIv1vK6jSu/ZMrf0/r/7D31A2VTRrSRe/3F8KBGkCG7b5rXi9VVgZHJu7/z9PQZatd4NFSPVntAVoEDZdS+idlkgz71ZV+x8HaHFAKHtCbtllNIDWq3O+XmyhDMdeZIbmXKldQvUCpiLrBa+r827m9nBkF+RiD9aCwb5fCkVF5qn1H0Xmo3663nLomdKtH9Hp9kBv5iebmTifNhU7l5F7lSA26MQktp9QvPwmlNq5Kb+dPfTUkTAnrdhMPmTxhXZAsZsnWXewR9i6KI4YpcCitxnxjO1WRFJ/Kyai+N47/9KBhMnKT+hFfEC+5uyBtaSmnoQUczT5kBOqNcqYhP4PZ0zOyJvsAvXYq3Hs9CeDDqN5z9xXABR2bBH4GjkwuVYAAlwvuAdChh2eypsSGIRvuABnyC6ro=
+    secure: cC1YoVU3a6splQoj73Lc0ooFsIqrwnv/Hn2hM7yw1wgtPIBczfkjU0DT2N+P49okE4z2yi+AEk38FT42Au8AiSu+CFWfIw0C1VhyJqS6K3TlD1tuN4SlVgEgJm9SMKMGcFo+PIrl7eb4FZCcFG1LL+6cPeYbmX+L+mu363zJqjgXxwewxQQDDPIUb33aqD7vNf7P4GlWHEYunp1GZosxS14QNySWMaUPYA5N8NfemFhJMkzDAlcpo4iofXO8tzC6OR4b8oQ5Itqr6F6rGbv0Kmvxn42cSbbbX+kAE5K4W/Y70oqCc4d8GeFi7mgdcBf5D3xTIQ4TMgp9rzTmvXlm1fBke+utCuxektI1YrWlrk+PpPow4g1Pm9t1szPuF21kjRHXGeQJRCwGqWVJJMvFiGpyztQ0GJBZXwqfsI3qZ20DyWj4naVSSEqXHrRMV/iDXXTJ/vCO7Z2lvasP63tfSkWKTiRKPRwzo+gdtEaO9Ube9nGCtAOZ8zsJBDeWZfmNZEg7kT2oHVm+T86dSRrtxhyZGc+EP12utqfT+YOrj0zLMUbOOqoQI73G4rF7f8LKgFWRSJ4g6Splr7gLTBD7e+SdyNg+1lLfy7PEaPaBh+cPoSxStnsjV5NNckSNXqO2wPxI6g020TfRR58agBNlr/IZEeYl73s1LqzyzW22mCY=
   app: warm-hamlet-29500
   on:
     repo: DivaGodiva/shadowverse-wishlist
