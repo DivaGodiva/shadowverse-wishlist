@@ -11,25 +11,25 @@ Deployed application: https://warm-hamlet-29500.herokuapp.com/
 
 # Screenshots
 
-##### Landing page:
+### Landing page:
 
 Users will first land here. If you have an account, login. If not, signup.
 
 ![image](https://user-images.githubusercontent.com/33299951/47969737-04011800-e031-11e8-8783-0d0ed1ec8d9d.png)
 
-##### Login: 
+### Login: 
 
 Enter username and password to begin using the site.
 
 ![image](https://user-images.githubusercontent.com/33299951/47969754-3d398800-e031-11e8-8d55-4abf6abdf2ac.png)
 
-##### Card-Search:
+### Card-Search:
 
 Initial landing page after successful login or signup.
 
 ![image](https://user-images.githubusercontent.com/33299951/47969770-56dacf80-e031-11e8-958d-0464df6c34a5.png)
 
-##### Card-Search (class clicked + card hover): 
+### Card-Search (class clicked + card hover): 
 
 Click a class bauble to see the card set for that particular class. Hover over cards to see their effects,
 and add cards. Before adding a card, you will be prompted to choose "high" or "low". You can also use the 
@@ -44,7 +44,7 @@ here. They will be split by either "high" or "low" priority, which you chose whe
 
 ![image](https://user-images.githubusercontent.com/33299951/47969793-88539b00-e031-11e8-97da-50a2a31df103.png)
 
-##### Wish-List (card hover):
+### Wish-List (card hover):
 
 Hover over the cards to see their effects. You can also swap card priorities, or drop(delete) cards from your
 list. 
@@ -53,7 +53,7 @@ list.
 
 # API Documentation
 
-##### POST "/cardSearch"
+### POST "/cardSearch"
 
 Request body:
 ```
