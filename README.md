@@ -55,4 +55,12 @@ list.
 
 - Client
   * EJS
-  * Thing
+  * Vanilla Javascript
+
+- Server
+  * Express
+  * Node
+  * MongoDB
+  * Bcrypt
+  * Passport
+  
