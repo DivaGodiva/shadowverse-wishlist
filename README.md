@@ -11,7 +11,7 @@ Deployed application: https://warm-hamlet-29500.herokuapp.com/
 
 # Screenshots
 
-#####Landing page:
+##### Landing page:
 
 ![image](https://user-images.githubusercontent.com/33299951/47969737-04011800-e031-11e8-8783-0d0ed1ec8d9d.png)
 
