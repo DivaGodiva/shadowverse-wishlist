@@ -32,7 +32,8 @@ Initial landing page after successful login or signup.
 ##### Card-Search (class clicked + card hover): 
 
 Click a class bauble to see the card set for that particular class. Hover over cards to see their effects,
-and add cards. Before adding a card, you will be prompted to choose "high" or "low".
+and add cards. Before adding a card, you will be prompted to choose "high" or "low". You can also use the 
+searchbar to filter cards by name.
 
 ![image](https://user-images.githubusercontent.com/33299951/47969781-6fe38080-e031-11e8-8adb-6a11bc7fe6a8.png)
 
