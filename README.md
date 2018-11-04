@@ -8,3 +8,7 @@ All of your added cards will be displayed, split by high and low priority. Card 
 dropped(deleted) from your list. 
 
 Deployed application: https://warm-hamlet-29500.herokuapp.com/
+
+# Screenshots
+
+![image](https://user-images.githubusercontent.com/33299951/47969737-04011800-e031-11e8-8783-0d0ed1ec8d9d.png)
