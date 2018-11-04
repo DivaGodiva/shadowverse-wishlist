@@ -63,4 +63,5 @@ list.
   * MongoDB
   * Bcrypt
   * Passport
+  * Mocha/Chai
   
