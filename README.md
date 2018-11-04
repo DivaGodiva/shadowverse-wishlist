@@ -7,4 +7,4 @@ can add a card as a high priority card, or a low priority card. After adding the
 All of your added cards will be displayed, split by high and low priority. Card priorities can also be swapped or 
 dropped(deleted) from your list. 
 
-Link to the deployed application: https://warm-hamlet-29500.herokuapp.com/
+Deployed application: https://warm-hamlet-29500.herokuapp.com/
