@@ -56,13 +56,13 @@ list.
 ##### POST "/cardSearch"
 
 Request body:
-
+```
 {
   "userId": "5bc0c6ea8cd903c2d2306381",
   "cardId": "900111020",
   "priority": "low"
 }
-
+```
 # Stack
 
 - Client
