@@ -56,6 +56,7 @@ list.
 - Client
   * EJS
   * Vanilla Javascript
+  * HTML/CSS
 
 - Server
   * Express
