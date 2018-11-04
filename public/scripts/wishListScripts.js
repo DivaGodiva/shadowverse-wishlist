@@ -26,7 +26,7 @@ const cardCreator = function(vari, imgUrl, nameUrl, imgId, pri, dbId) {
   toolTip.innerHTML = `${desc}`;
   addDiv.setAttribute('class', 'actions');
   editButton.innerHTML = 'SWAP';
-  removeButton.innerHTML = 'DEL';
+  removeButton.innerHTML = 'DROP';
   addDiv.appendChild(editButton);
   addDiv.appendChild(removeButton);
   if (priority === 'high') {
@@ -129,7 +129,7 @@ cards.addEventListener('click', function(e) {
   let removeObj = {
     dbId: e.target.parentNode.parentNode.id
   };
-  if (e.target.innerHTML === 'DEL') {
+  if (e.target.innerHTML === 'DROP') {
     e.target.parentNode.parentNode.remove();
     api.remove('/wishList', removeObj)
       .catch(function(error) {

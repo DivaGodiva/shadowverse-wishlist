@@ -36,5 +36,5 @@ a {
 }
 
 a::before {
-  content: "⭆ ";
+  content: "⟳ ";
 }

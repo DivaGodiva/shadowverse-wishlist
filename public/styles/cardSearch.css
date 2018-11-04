@@ -22,6 +22,17 @@ h1 {
   margin-top: .5em;
 }
 
+label {
+  display: none;
+}
+
+input[type=text] {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 15%;
+}
+
 .class-image {
   height: 100px;
   width: 100px;
@@ -130,12 +141,8 @@ li.card-display:hover .actions {
   opacity: 1;
 }
 
-button {
-  opacity: .8;
-} 
-
 .grey-search {
-  background-color: grey;
+  background-color: silver;
 }
 
 ul#card-holder {
@@ -144,10 +151,14 @@ ul#card-holder {
 }
 
 select {
+  background-color: transparent;
+  color: white;
+  border-image: linear-gradient(to left, transparent, white, transparent);
+  border-image-slice: 1;
+  border-width: 1px;
+  border-left: transparent;
+  border-right: transparent;
   padding: 2px 6px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  opacity: .75;
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
   border-radius: 0px;

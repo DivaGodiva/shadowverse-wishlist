@@ -28,7 +28,7 @@ hr {
 }
 
 .container h1:first-child::before {
-  content: "⭆ ";
+  content: "⟳ ";
 }
 
 .alert {

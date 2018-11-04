@@ -14,7 +14,6 @@ const session = require('express-session');
 
 const configDB = require('./config/database.js');
 
-// mongoose.connect(configDB.url); 
 mongoose.set('useFindAndModify', false);
 
 require('./config/passport')(passport); 
@@ -85,34 +84,6 @@ const closeServer = function() {
   });
 };
 
-// app.listen(port);
-// console.log('STARTINNGGGGGG ' + port);
-
-// app.listen(port, function () {
-//   console.info(`Server listening on ${this.address().port}`);
-// }).on('error', err => {
-//   console.error(err);
-// });
-
-// if (process.env.NODE_ENV !== 'test') {
-//   mongoose.connect(configDB.url)
-//     .then(instance => {
-//       const conn = instance.connections[0];
-//       console.info(`Connected to: mongodb://${conn.host}:${conn.port}/${conn.name}`);
-//     })
-//     .catch(err => {
-//       console.error(err);
-//     });
-
-//   app.listen(port, function () {
-//     console.info(`STARTTTINNGGGGGGG ${this.address().port}`);
-//   }).on('error', err => {
-//     console.error(err);
-//   });
-// }
-
-// if server.js is called directly (aka, with `node server.js`), this block
-// runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
   console.log(configDB.url);
   runServer(configDB.url).catch(err => console.error(err));

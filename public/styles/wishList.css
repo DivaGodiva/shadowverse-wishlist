@@ -133,7 +133,13 @@ li.card-display:hover .actions {
 }
 
 button {
-  opacity: .75;
+  background-color: transparent;
+  color: white;
+  border-image: linear-gradient(to left, transparent, white, transparent);
+  border-image-slice: 1;
+  border-width: 1px;
+  border-left: transparent;
+  border-right: transparent;
 } 
 
 #db-info {
