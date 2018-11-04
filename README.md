@@ -51,6 +51,18 @@ list.
 
 ![image](https://user-images.githubusercontent.com/33299951/47969807-b76a0c80-e031-11e8-91bc-81cf606d0bf0.png)
 
+# API Documentation
+
+##### POST "/cardSearch"
+
+Request body:
+
+{
+  "userId": "5bc0c6ea8cd903c2d2306381",
+  "cardId": "900111020",
+  "priority": "low"
+}
+
 # Stack
 
 - Client
