@@ -50,3 +50,9 @@ Hover over the cards to see their effects. You can also swap card priorities, or
 list. 
 
 ![image](https://user-images.githubusercontent.com/33299951/47969807-b76a0c80-e031-11e8-91bc-81cf606d0bf0.png)
+
+# Stack
+
+- Client
+  * EJS
+  * Thing
