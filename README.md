@@ -37,7 +37,7 @@ searchbar to filter cards by name.
 
 ![image](https://user-images.githubusercontent.com/33299951/47969781-6fe38080-e031-11e8-8adb-6a11bc7fe6a8.png)
 
-##### Wish-List:
+### Wish-List:
 
 Click on the Card-List in the navigation bar to land at your wish-list. Your added cards will be displayed 
 here. They will be split by either "high" or "low" priority, which you chose when adding the card.
@@ -58,9 +58,20 @@ list.
 Request body:
 ```
 {
-  "userId": "5bc0c6ea8cd903c2d2306381",
-  "cardId": "900111020",
-  "priority": "low"
+  userId: '5bc0c6ea8cd903c2d2306381',
+  cardId: '900144020',
+  priority: 'low' 
+}
+```
+Response body:
+```
+{ 
+  _id: 5bdf8a5b5146680e5b1928e7,
+  userId: 5bc0c6ea8cd903c2d2306381,
+  cardId: '101111020',
+  priority: 'high',
+  createdAt: 1541376603895,
+  __v: 0 
 }
 ```
 # Stack
