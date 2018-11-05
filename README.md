@@ -55,6 +55,8 @@ list.
 
 ### POST "/cardSearch"
 
+Creates new card entry.
+
 Request body:
 ```
 {
@@ -68,12 +70,66 @@ Response body:
 { 
   _id: 5bdf8a5b5146680e5b1928e7,
   userId: 5bc0c6ea8cd903c2d2306381,
-  cardId: '101111020',
-  priority: 'high',
+  cardId: '900144020',
+  priority: 'low',
   createdAt: 1541376603895,
   __v: 0 
 }
 ```
+### GET "/wishList"
+
+Display cards in wish-list:
+
+Request body:
+```
+{
+  userId: '5bc0c6ea8cd903c2d2306381',
+}
+```
+Response body:
+```
+[ 
+  { 
+    cardId: '110141020',
+    id: 5bca4141d67e5ae0dd4d2726,
+    createdAt: 1539981633115,
+    priority: 'high'
+  }
+]
+```
+### DELETE "/wishList"
+
+Deletes a card in the wish-list:
+
+Request body:
+```
+{
+  _id: 5bdf8a5b5146680e5b1928e7,
+}
+```
+### PUT "/wishList"
+
+Changes priority of a card in the wish-list:
+
+Request body:
+```
+{
+  _id: 5bdf8a5b5146680e5b1928e7,
+  priority: 'low' 
+}
+```
+Response body:
+```
+{ 
+  _id: 5bdf8a5b5146680e5b1928e7,
+  userId: 5bc0c6ea8cd903c2d2306381,
+  cardId: '110141020',
+  priority: 'low',
+  createdAt: 1539981633115,
+  __v: 0 
+}
+```
+
 # Stack
 
 - Client
