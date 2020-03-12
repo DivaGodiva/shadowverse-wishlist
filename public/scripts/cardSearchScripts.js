@@ -52,7 +52,9 @@ const cardDeletor = function() {
 const renderList = function(vari, list) {
   const jsonObj = JSON.parse(vari).data.cards;
   jsonObj.forEach(el => {
-    list.push(el);
+    if (el.card_name) {
+      list.push(el);
+    }
   });
 };
 
@@ -74,6 +76,7 @@ const toolTipCreator = function(json) {
 };
 
 const useCardCreator = function(vari) {
+  console.log(vari);
   vari.forEach(el => {
     cardCreator(el.card_id, el.card_name);
     let descArray = toolTipCreator(el);
@@ -82,9 +85,17 @@ const useCardCreator = function(vari) {
   });
 };
 
+const truncateCardArray = function(array) {
+  let truncatedCardArray = [];
+  for (let i = 0; i < 49; i++) {
+    truncatedCardArray.push(array[i]);
+  }
+  return truncatedCardArray;
+}
+
 const renderListItemClick = function(vari, list) {
   renderList(vari, list);
-  useCardCreator(list);
+  useCardCreator(truncateCardArray(list));
 };
 
 const renderListItemKey = function(list) {
@@ -126,7 +137,12 @@ document.querySelector('.card-form').addEventListener('keyup', function(e) {
   const inputVal = e.target.value.toLowerCase().trim();
   const regexp = new RegExp(inputVal, 'i');
   let array = cardArray.filter(item => regexp.test(item.card_name));
-  renderListItemKey(array);
+  let array2 = truncateCardArray(cardArray).filter(item => regexp.test(item.card_name));
+  if (array.length >= 49) {
+    renderListItemKey(array2);
+  } else if (array.length < 49) {
+    renderListItemKey(array);
+  }
 });
 
 document.querySelector('.card-form').addEventListener('submit', function(e) {
