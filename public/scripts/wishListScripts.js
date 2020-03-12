@@ -16,7 +16,7 @@ const cardCreator = function(vari, imgUrl, nameUrl, imgId, pri, dbId) {
   let addDiv = document.createElement('DIV');
   let editButton = document.createElement('BUTTON');
   let removeButton = document.createElement('BUTTON');
-  img.setAttribute('src', `${imgUrl}`);
+  img.setAttribute('src', `https://sv.bagoum.com/cardF/en/c/${imgUrl}`);
   img.setAttribute('class', 'card-picture');
   img.setAttribute('alt', `${nameUrl}`);
   listEl.setAttribute('id', `${dbId}`);
@@ -58,7 +58,7 @@ const toolTipCreator = function(json) {
 };
 
 const useCardCreator = function(vari, pri, dbId) {
-  cardCreator(vari, vari.image, vari.name, vari.id, pri, dbId);
+  cardCreator(vari, vari.id, vari.name, vari.id, pri, dbId);
 };
 
 const getSequence = function() {

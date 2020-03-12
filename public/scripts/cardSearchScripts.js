@@ -13,7 +13,8 @@ const cardCreator = function(imgUrl, nameUrl) {
   let optionUno = document.createElement('OPTION');
   let optionDos = document.createElement('OPTION');
   let optionTres = document.createElement('OPTION');
-  img.setAttribute('src', `https://shadowverse-portal.com/image/card/en/C_${imgUrl}.png`);
+  // img.setAttribute('src', `https://shadowverse-portal.com/image/card/en/C_${imgUrl}.png`);
+  img.setAttribute('src', `https://sv.bagoum.com/cardF/en/c/${imgUrl}`);
   img.setAttribute('class', 'card-picture');
   img.setAttribute('alt', `${nameUrl}`);
   listEl.setAttribute('id', `${nameUrl}`);
