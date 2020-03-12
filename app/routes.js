@@ -92,6 +92,7 @@ module.exports = function(app, passport) {
     const {dbId, pri} = req.body;
     Card.findOneAndUpdate({_id: dbId}, {priority: pri}, {new: true})
       .then(result => {
+        console.log(result);
         res.json(result);
       })
       .catch(function(error) {
