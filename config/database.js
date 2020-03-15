@@ -6,7 +6,7 @@ const getURL = function() {
     return `${DB_URL}`;
   } 
   else {
-    return 'cluster0-shard-00-01-p9fnw.mongodb.net:27017';
+    return `${DB_URL}`;
   }
 };
 
