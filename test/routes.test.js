@@ -9,7 +9,7 @@ const Card = require('../app/models/cards');
 
 const seedCards = require('../db/seed/cards');
 const seedUsers = require('../db/seed/users');
-// const configDB = require('../config/database.js');
+const configDB = require('../config/database.js');
 const { app, runServer, closeServer } = require('../server');
 
 const expect = chai.expect;
@@ -21,7 +21,7 @@ describe('SV Wishlist', function () {
   const password = 'examplePass';
 
   before(function () {
-    return runServer(process.env.DB_URL);
+    return runServer(configDB.testUrl);
   });
 
   beforeEach(function () {
