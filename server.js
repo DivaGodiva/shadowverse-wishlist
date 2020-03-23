@@ -12,7 +12,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-// const configDB = require('./config/database.js');
+const configDB = require('./config/database.js');
 
 mongoose.set('useFindAndModify', false);
 
@@ -85,8 +85,8 @@ const closeServer = function() {
 };
 
 if (require.main === module) {
-  // console.log(configDB.url);
-  runServer('mongodb+srv://DivaGodiva:Dongsimon1@cluster0-p9fnw.mongodb.net/test?retryWrites=true&w=majority').catch(err => console.error(err));
+  console.log(configDB.url);
+  runServer(configDB.url).catch(err => console.error(err));
 }
 
 module.exports = { app, runServer, closeServer };
