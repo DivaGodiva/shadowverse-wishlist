@@ -86,7 +86,7 @@ const closeServer = function() {
 
 if (require.main === module) {
   // console.log(configDB.url);
-  runServer('mongodb+srv://DivaGodiva:<password>@cluster0-p9fnw.mongodb.net/test?retryWrites=true&w=majority').catch(err => console.error(err));
+  runServer('mongodb+srv://DivaGodiva:Dongsimon1@cluster0-p9fnw.mongodb.net/test?retryWrites=true&w=majority').catch(err => console.error(err));
 }
 
 module.exports = { app, runServer, closeServer };
